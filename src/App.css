@@ -1,5 +1,6 @@
 body {
   background-color: #e7f5e6;
+  margin: 0;
 }
 .App {
   text-align: center;
@@ -32,6 +33,9 @@ body {
   justify-content: space-around;
   font-size: calc(8px + 2vmin);
   color: white;
+}
+.App-header > div:hover {
+  background-color: red;
 }
 
 .App-link {

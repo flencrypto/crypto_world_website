@@ -13,6 +13,7 @@ function App() {
               <div><img className="App-logo" src={btc_icon} alt="logo"/></div>
               <div>Crypto World</div>
             </div>
+            
             <div>Home</div> 
             <div>Exchange </div> 
             <div>News</div> 
