@@ -1,9 +1,18 @@
+body {
+  background-color: #e7f5e6;
+}
 .App {
   text-align: center;
 }
 
+/* Logo section include logo and website brand */
+.Logo-section {
+  display: flex;
+  flex-direction: row;
+  font-size: 5vmin;
+}
 .App-logo {
-  height: 40vmin;
+  height: 8vh;
   pointer-events: none;
 }
 
@@ -15,12 +24,12 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 6vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-around;
+  font-size: calc(8px + 2vmin);
   color: white;
 }
 
