@@ -11,6 +11,7 @@ body {
   flex-direction: row;
   font-size: 5vmin;
 }
+
 .App-logo {
   height: 8vh;
   pointer-events: none;

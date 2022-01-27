@@ -21,8 +21,11 @@ function App() {
           <div>Fear & Greed Index </div> 
 
         </div>
-
-        <h1>Content</h1>
+        
+        <div>
+          <h1>Content</h1>
+        </div>
+        
 
       </div>
       
