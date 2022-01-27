@@ -15,9 +15,10 @@ function App() {
           </div>
 
           <div>Home</div> 
-          <div>Wallet </div> 
+          
           <div>Exchange </div> 
           <div>News</div> 
+          <div>Fear & Greed Index </div> 
 
         </div>
 
