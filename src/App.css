@@ -6,15 +6,9 @@ body {
   text-align: center;
 }
 
-/* Logo section include logo and website brand */
-.logo-container {
-  display: flex;
-  flex-direction: row;
-  font-size: 5vmin;
-}
 
 .app-logo {
-  height: 8vh;
+  height: 25vh;
   pointer-events: none;
 }
 
@@ -24,18 +18,22 @@ body {
   }
 }
 
-.App-navbar {
-}
-
 .navbar-container {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 6vh;
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-around; */
   font-size: calc(8px + 2vmin);
   color: white;
+
+  position: fixed;
+  left: 0;
+  margin: 10px;
+  height: 100vh;
+  margin: 0px;
+  background-color: rgb(0, 21, 41);
 }
 
 @keyframes app-logo-spin {
@@ -96,13 +94,13 @@ a:hover {
   background-color: rgb(0, 21, 41);
 } */
 
-/* .logo-container{
+.logo-container{
   background-color: #001529;
   display: flex;
   padding: 20px;
   align-items: center;
   width: 100%;
-} */
+}
 
 .logo {
   margin: 0 0 0 15px;
