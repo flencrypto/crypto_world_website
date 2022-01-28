@@ -15,7 +15,8 @@ function App() {
             </div>
             
             <div>Home</div> 
-            <div>Exchange </div> 
+            <div>Cryptocurrencies </div> 
+            <div>Exchanges</div> 
             <div>News</div> 
             <div>Fear & Greed Index </div> 
           </div>
