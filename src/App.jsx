@@ -17,7 +17,27 @@ const App = () => {
           </div>
 
           <div className="main">
-            <h1>Content</h1>
+            <Layout>
+              <div className="routes">
+                <Switch>
+                  <Route exact path='/'>
+                    <Homepage/>
+                  </Route>
+                  <Route exact path='/exchanges'>
+                    <Exchanges/>
+                  </Route>
+                  <Route exact path='/cryptocurrencies'>
+                    <Cryptocurrencies/>
+                  </Route>
+                  <Route exact path='/crypto/:coinId'>
+                    <CryptoDetails/>
+                  </Route>
+                  <Route exact path='/news'>
+                    <News/>
+                  </Route>
+                </Switch>
+              </div>
+            </Layout>
           </div>
 
           <div className="footer">

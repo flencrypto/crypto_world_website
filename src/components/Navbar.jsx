@@ -6,7 +6,7 @@ import btc_icon from '../btc_icon.svg'
 
 const Navbar = () => {
   return (
-            <div className="navbar-container">
+            <div className="nav-container">
                 <div className="logo-container">
                     <img className="app-logo" src={btc_icon} alt="logo"/>
                     
@@ -14,7 +14,7 @@ const Navbar = () => {
                     
                     {/* <Button className="menu-control-container"></Button> */}
                 </div>
-                
+
                 <Menu>
                     <Menu.Item icon={<HomeOutlined/>}>
                         <Link to='/'>Home</Link>
