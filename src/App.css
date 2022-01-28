@@ -34,6 +34,7 @@ body {
   font-size: calc(8px + 2vmin);
   color: white;
 }
+
 .App-header > div:hover {
   background-color: red;
 }
