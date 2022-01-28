@@ -24,7 +24,7 @@ body {
   }
 }
 
-.App-header {
+.App-navbar {
   background-color: #282c34;
   min-height: 6vh;
   display: flex;
@@ -35,7 +35,7 @@ body {
   color: white;
 }
 
-.App-header > div:hover {
+.App-navbar > div:hover {
   background-color: red;
 }
 
