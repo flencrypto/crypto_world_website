@@ -2,7 +2,10 @@ import { useState } from 'react'
 import './App.css'
 import {Switch,Route,Link} from 'react-router-dom'
 import { Layout,Typography, Space } from "antd"
-import btc_icon from './btc_icon.svg'
+
+import { Navbar } from "./components"
+
+
 const App = () => {
 
   return (
@@ -10,16 +13,7 @@ const App = () => {
         <div className="App">
 
           <div className="App-navbar">
-            <div className="Logo-section">
-              <div><img className="App-logo" src={btc_icon} alt="logo"/></div>
-              <div>Crypto World</div>
-            </div>
-            
-            <div>Home</div> 
-            <div>Cryptocurrencies </div> 
-            <div>Exchanges</div> 
-            <div>News</div> 
-            <div>Fear & Greed Index </div> 
+            <Navbar/>
           </div>
 
           <div className="App-main">
@@ -27,7 +21,7 @@ const App = () => {
           </div>
 
           <div className="App-footer">
-
+            <p>Footer</p>
           </div>
           
         </div>    
