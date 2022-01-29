@@ -5,11 +5,19 @@ import App from './App'
 import {BrowserRouter as Router} from 'react-router-dom'
 import 'antd/dist/antd.css';
 
+import { Provider } from "react-redux"
+import store from './app/store'
+
+
+
 ReactDOM.render(
+ 
   <Router>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+     <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>
   </Router>,
   document.getElementById('root')
 )
