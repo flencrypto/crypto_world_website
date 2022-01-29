@@ -3,6 +3,7 @@ import millify from 'millify'
 import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
 import { useGetCryptosQuery } from "../services/cryptoApi";
+import { useGetCryptosCoingeckoQuery } from "../services/cryptoApi";
 
 
 
@@ -11,9 +12,17 @@ const {Title} = Typography
 
 const Homepage = () => {
 
-  const {data,isFetching} = useGetCryptosQuery();
+  var {data,isFetching} = useGetCryptosQuery();
+  const dataCoinranking = data
+  
 
-  const globalStats = data?.data?.stats
+  var {data,isFetching}  = useGetCryptosCoingeckoQuery();
+
+  const dataCoingecko = data
+
+
+
+  const globalStats = dataCoinranking?.data?.stats
   
 
   if (isFetching) return 'Loading...'
