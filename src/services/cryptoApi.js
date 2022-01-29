@@ -1,9 +1,10 @@
+import React from "react";
 import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
 // For coinranking
 const cryptoApiHeader = { 
     'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
-    'x-rapidapi-key': 'd15052e859msh9a97166e104b84ap1a1193jsn40d1de61b5d6'
+    'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY
 }
 
 const baseUrl = 'https://coinranking1.p.rapidapi.com'
@@ -30,7 +31,7 @@ export const {
 //For Coingecko
 const cryptoApiHeaderCoingecko = { 
     'x-rapidapi-host': 'coingecko.p.rapidapi.com',
-    'x-rapidapi-key': 'd15052e859msh9a97166e104b84ap1a1193jsn40d1de61b5d6'
+    'x-rapidapi-key':  process.env.REACT_APP_RAPIDAPI_KEY
 }
 
 const params = {vs_currency:'usd'};
