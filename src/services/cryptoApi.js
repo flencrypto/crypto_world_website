@@ -8,11 +8,7 @@ const cryptoApiHeader = {
 
 const baseUrl = 'https://coinranking1.p.rapidapi.com'
 
-
-
 const createRequest = (url)=> ({url,headers:cryptoApiHeader});
-
-
 
 export const cryptoApi = createApi({
     reducerPath: 'cryptoApi',
@@ -31,8 +27,6 @@ export const {
 
 
 
-
-
 //For Coingecko
 const cryptoApiHeaderCoingecko = { 
     'x-rapidapi-host': 'coingecko.p.rapidapi.com',
@@ -43,17 +37,14 @@ const params = {vs_currency:'usd'};
 
 const baseUrlCoingecko = 'https://coingecko.p.rapidapi.com';
 
-
 const createSecondRequest = (url)=> ({url,headers:cryptoApiHeaderCoingecko,params:params});
-
-
 
 export const cryptoApiCoingecko = createApi({
     reducerPath: 'cryptoApiCoingecko',
     baseQuery: fetchBaseQuery({baseUrl:baseUrlCoingecko}),
     endpoints: (builder)=>({
         getCryptosCoingecko: builder.query({
-            query: () => createSecondRequest('/coins/markets')
+            query: () => createSecondRequest('/exchanges')
         })
     })
 })
@@ -66,16 +57,3 @@ export const {
 
 
 
-
-
-
-
-
-// var options = {
-//   method: 'GET',
-//   url: 'https://coingecko.p.rapidapi.com/exchanges',
-//   headers: {
-//     'x-rapidapi-host': 'coingecko.p.rapidapi.com',
-//     'x-rapidapi-key': 'd15052e859msh9a97166e104b84ap1a1193jsn40d1de61b5d6'
-//   }
-// };
