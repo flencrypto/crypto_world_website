@@ -39,7 +39,7 @@ const App = () => {
                   {/* If the routes is not found */}
                   <Route path="*">
                     <NotFound/>
-                    </Route>
+                  </Route>
                 </Switch>
               </div>
             </Layout>
