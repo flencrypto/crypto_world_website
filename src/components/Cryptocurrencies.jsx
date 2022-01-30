@@ -7,10 +7,13 @@ import { useGetCryptosCoingeckoQuery } from "../services/cryptoApi";
 
 const Cryptocurrencies = ({simplified}) => {
 
-  const per_page = simplified ? 10 :100;
+  const per_page = simplified ? 10 :20;
 
+  const page = simplified && 1;
 
-  const {data:cryptoListCoingecko, isFetching} = useGetCryptosCoingeckoQuery(per_page);
+  console.log(page,per_page)
+
+  const {data:cryptoListCoingecko, isFetching} = useGetCryptosCoingeckoQuery({page,per_page});
   
   console.log(cryptoListCoingecko)
 
