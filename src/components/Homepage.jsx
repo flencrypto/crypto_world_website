@@ -7,27 +7,14 @@ import { useGetCryptosCoingeckoQuery } from "../services/cryptoApi";
 
 import { Cryptocurrencies,News } from ".";
 
-
-
-
 const {Title} = Typography
+
 
 
 const Homepage = () => {
 
-  var {data,isFetching} = useGetCryptosQuery(10);
-  const dataCoinranking = data
-  
-  // var {data,isFetching}  = useGetCryptosCoingeckoQuery();
-  // const dataCoingecko = data
-
-
-
-  const globalStats = dataCoinranking?.data?.stats
-  
-  // const coinList = dataCoingecko
-  
-
+  var {data,isFetching} = useGetCryptosQuery();
+  const globalStats = data?.data?.stats
 
 
   if (isFetching) return 'Loading...'

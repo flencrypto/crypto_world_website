@@ -3,8 +3,8 @@ import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
 // For coinranking
 const cryptoApiHeader = { 
-    'x-rapidapi-host': process.env.REACT_APP_COINRANKING_RAPIDAPI_HOST,
-    'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_API_KEY
+    'x-rapidapi-host': process.env.REACT_APP_COINRANKING_RAPIDAPI_HOST_test,
+    'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_API_KEY_test
     // JSON.stringify(process.env.REACT_APP_RAPIDAPI_KEY)
 }
 
@@ -17,7 +17,7 @@ export const cryptoApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl:baseUrl}),
     endpoints: (builder)=>({
         getCryptos: builder.query({
-            query: (count) => createRequest(`/coins?limit=${count}`)
+            query: () => createRequest(`/coins`)
         })
     })
 })
@@ -45,7 +45,7 @@ export const cryptoApiCoingecko = createApi({
     baseQuery: fetchBaseQuery({baseUrl:baseUrlCoingecko}),
     endpoints: (builder)=>({
         getCryptosCoingecko: builder.query({
-            query: () => createSecondRequest('/exchanges')
+            query: (per_page) => createSecondRequest(`/coins/markets?per_page=${per_page}`)
         })
     })
 })
