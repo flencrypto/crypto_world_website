@@ -2,8 +2,11 @@ import React from "react";
 import millify from 'millify'
 import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
-// import { useGetCryptosQuery } from "../services/cryptoApi";
+import { useGetCryptosQuery } from "../services/cryptoApi";
 import { useGetCryptosCoingeckoQuery } from "../services/cryptoApi";
+
+import { Cryptocurrencies,News } from ".";
+
 
 
 
@@ -12,18 +15,17 @@ const {Title} = Typography
 
 const Homepage = () => {
 
-  // var {data,isFetching} = useGetCryptosQuery();
-  // const dataCoinranking = data
+  var {data,isFetching} = useGetCryptosQuery();
+  const dataCoinranking = data
   
-  var {data,isFetching}  = useGetCryptosCoingeckoQuery();
-
-  const dataCoingecko = data
-  console.log(dataCoingecko)
+  // var {data,isFetching}  = useGetCryptosCoingeckoQuery();
+  // const dataCoingecko = data
 
 
-  const globalStats = dataCoingecko?.data?.stats
+
+  const globalStats = dataCoinranking?.data?.stats
   
-  const coinList = dataCoingecko
+  // const coinList = dataCoingecko
   
 
 
@@ -42,11 +44,36 @@ const Homepage = () => {
         <Col span={12}><Statistic title="Total Market Cap" value={globalStats?millify(globalStats.totalMarketCap):'No data'}/></Col>
         <Col span={12}><Statistic title="Total 24h Volume" value={globalStats?millify(globalStats.total24hVolume):'No data'}/></Col>
         <Col span={12}><Statistic title="Total Markets" value={globalStats?globalStats.totalMarkets:'No data'}/></Col>
-
-        <Col span={12}> Exchanges</Col>
-        {coinList.map((coin,id)=>(<Col key={coin+id} span={12}>{coin.id}</Col>))}
-        
       </Row>
+
+      <div className="home-heading-container">
+
+        <Title level={2} className="home-title">
+          Top 10 Cryptocurrencies in the world
+        </Title>
+
+        <Title level={3} className="show-more">
+          <Link to='/cryptocurrencies'>Show more</Link>
+        </Title>
+
+        <Cryptocurrencies simplified/>
+
+
+        <Title level={2} className="home-title">
+          Latest Crypto News
+        </Title>
+
+        <Title level={3} className="show-more">
+          <Link to='/news'>Show more</Link>
+        </Title>
+
+        <News/>
+
+
+
+
+      </div>
+      
       
       </>
   );
