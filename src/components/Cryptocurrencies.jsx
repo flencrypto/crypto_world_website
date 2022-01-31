@@ -35,10 +35,12 @@ const Cryptocurrencies = ({simplified}) => {
   
   const onSearch = (searchText) => {
     const filteredData = allCryptos?.filter((coin)=>
-        coin.name.toLowerCase().includes(searchText.toLowerCase()) 
+        coin.name.toLowerCase().startsWith(searchText.toLowerCase()) 
+        
       || 
-        coin.symbol.toLowerCase().includes(searchText.toLowerCase())
+        coin.symbol.toLowerCase().startsWith(searchText.toLowerCase())
         ) 
+    console.log(filteredData)
     let cryptoArray = [];
     filteredData.map((coin)=>cryptoArray.push({value:coin.name+ ' (' + coin.symbol.toUpperCase() +')'}))
 
@@ -77,9 +79,9 @@ const Cryptocurrencies = ({simplified}) => {
     setCryptos(cryptosCoingecko)
 
     const filteredData = cryptosCoingecko?.filter((coin)=>
-        coin.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+        coin.name.toLowerCase().startsWith(searchTerm.toLowerCase()) 
       || 
-        coin.symbol.toLowerCase().includes(searchTerm.toLowerCase()) 
+        coin.symbol.toLowerCase().startsWith(searchTerm.toLowerCase()) 
     )
 
     setCryptos(filteredData);
