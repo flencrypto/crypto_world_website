@@ -45,14 +45,21 @@ export const cryptoApiCoingecko = createApi({
     baseQuery: fetchBaseQuery({baseUrl:baseUrlCoingecko}),
     endpoints: (builder)=>({
         getCryptosCoingecko: builder.query({
-            query: ({page,per_page}) => createSecondRequest(`/coins/markets?page=${page}&per_page=${per_page}`)
-        })
+            query: ({page,per_page}) => createSecondRequest(`/coins/markets?page=${page}&per_page=${per_page}`),
+        }),
+
+        getCryptosListCoingecko: builder.query({
+            query: () => createSecondRequest('/coins/list'),
+        }),
     })
 })
 
 export const {
     useGetCryptosCoingeckoQuery,
+    useGetCryptosListCoingeckoQuery,
 } = cryptoApiCoingecko;
+
+
 
 
 

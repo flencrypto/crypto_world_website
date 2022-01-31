@@ -2,23 +2,23 @@ import React,{useState,useEffect} from "react";
 import millify from "millify";
 import { Link } from "react-router-dom";
 import { Card,Row,Col, Input } from "antd";
+ import { Pagination } from 'antd';
+import ReactPaginate from "react-paginate";
 
-import { useGetCryptosCoingeckoQuery } from "../services/cryptoApi";
+import { useGetCryptosCoingeckoQuery,useGetCryptosListCoingeckoQuery } from "../services/cryptoApi";
 
 const Cryptocurrencies = ({simplified}) => {
 
   const per_page = simplified ? 10 :20;
-
-  const page = simplified && 1;
-
-  console.log(page,per_page)
-
-  const {data:cryptoListCoingecko, isFetching} = useGetCryptosCoingeckoQuery({page,per_page});
-  
-  console.log(cryptoListCoingecko)
-
+  const [page, setPage] = useState(1);
   const [cryptos, setCryptos] = useState();
   const [searchTerm, setSearchTerm] = useState('');
+
+  const {data:cryptoListCoingecko, isFetching} = useGetCryptosCoingeckoQuery({page,per_page});
+
+  // const {data:coinList,isFetching:isFetchingCoinList}
+
+  console.log(cryptoListCoingecko)
   
   useEffect(() => {
     setCryptos(cryptoListCoingecko)
@@ -32,11 +32,21 @@ const Cryptocurrencies = ({simplified}) => {
 
     setCryptos(filteredData);
 
-  }, [cryptoListCoingecko,searchTerm]);
+  }, [cryptoListCoingecko,searchTerm,page]);
 
     
   
   if (isFetching) return '...Loading';
+
+
+
+  const  onShowSizeChange = (current, pageSize) =>{
+    console.log(current, pageSize);
+  }
+
+  const onPageChange = (page) => {
+    setPage(page)
+  }
 
 
   return (
@@ -51,21 +61,52 @@ const Cryptocurrencies = ({simplified}) => {
 
         <Row gutter={[32,32]} className="crypto-card-container"> 
           {cryptos?.map((currency)=>(
-            <Col xs={24} sm={12} lg={6} className="crypto-card" key={currency.id}>
-              <Link to={`/crypto/${currency.id}`}>
-                <Card title={`${currency.market_cap_rank}. ${currency.name} (${currency.symbol})`}
-                      extra={<img alt='' className="crypto-image" src={currency.image}/>}
+            <Col xs={24} sm={12} lg={6} className="crypto-card" key={currency?.id}>
+              <Link to={`/crypto/${currency?.id}`}>
+                <Card title={`${currency.market_cap_rank?currency.market_cap_rank:'Unrank'}. 
+                                ${currency?.name} 
+                                (${currency?.symbol.toUpperCase()})`}
+                      extra={<img alt='' className="crypto-image" src={currency?.image}/>}
                       hoverable
                     >
-                    <p>Price: {millify(currency.current_price)}</p>
-                    <p>Market Cap: {millify(currency.market_cap)}</p>
-                    <p>Daily Change: {millify(currency.market_cap_change_percentage_24h)}%</p>
+                    <p>Price: {currency.current_price?currency.current_price:'No data'}</p>
+                    <p>Market Cap: {currency.market_cap?millify(currency.market_cap):'No data'}</p>
+                    <p>Daily Change: {currency.market_cap_change_percentage_24h?millify(currency.market_cap_change_percentage_24h) + '%':'No data'}</p>
 
                 </Card>
               </Link>
             </Col>
           ))}
         </Row>
+
+        {!simplified&&
+        <div>
+
+            <Pagination
+              showSizeChanger = {false}
+              current={page}
+              // onShowSizeChange={onShowSizeChange}
+              pageSize={per_page}
+              defaultCurrent={1}
+              total={10000} //total
+              onChange={onPageChange}
+            />
+
+
+            {/* <br />
+            <Pagination
+              showSizeChanger
+              onShowSizeChange={onShowSizeChange}
+              defaultCurrent={3}
+              total={500}
+              disabled
+            /> */}
+        
+        </div>}
+          
+
+
+          
 
 
       </>
