@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import millify from "millify";
 import { Link } from "react-router-dom";
 import { Card,Row,Col, Input } from "antd";
- import { Pagination } from 'antd';
+ import { Pagination,AutoComplete } from 'antd';
 
 import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
 
@@ -15,31 +15,44 @@ const Cryptocurrencies = ({simplified}) => {
   const [cryptos, setCryptos] = useState();
   const [searchTerm, setSearchTerm] = useState('');
 
+ 
+
   const {data:cryptosCoingecko, isFetching} = useGetCryptosCoingeckoQuery({page,per_page});
 
   const {data:allCryptos,isFetching:isFetchingAllCryptos} = useGetAllCryptosCoingeckoQuery();
 
 
-  
-  useEffect(() => {
-    setCryptos(cryptosCoingecko)
 
-    const filteredData = cryptosCoingecko?.filter((coin)=>
-        coin.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+
+  //Autocomplete
+
+  const [value, setValue] = useState('');
+  const [options, setOptions] = useState([]); //options is list of object with {value:<value>}
+  // const [cryptoArray, setCryptoArray] = useState([]);
+  
+  const onSearch = (searchText) => {
+    const filteredData = allCryptos?.filter((coin)=>
+        coin.name.toLowerCase().includes(searchText.toLowerCase()) 
       || 
-        coin.symbol.toLowerCase().includes(searchTerm.toLowerCase()) 
+        coin.symbol.toLowerCase().includes(searchText.toLowerCase())
+        ) 
+    let cryptoArray = [];
+    filteredData.map((coin)=>cryptoArray.push({value:coin.name+ ' (' + coin.symbol.toUpperCase() +')'}))
+
+     setOptions(!searchText ? [] : cryptoArray)    
     
-    )
+  };
 
-    setCryptos(filteredData);
+  const onSelect = (data) => {
+    console.log('onSelect', data);
+  };
 
-  }, [cryptosCoingecko,searchTerm,page]);
-
-    
-  
-  if (isFetching) return '...Loading';
+  const onChange = (data) => {
+    setValue(data);
+  };
 
 
+  //Pagination
 
   const onShowSizeChange = (current, pageSize) =>{
     console.log(current, pageSize);
@@ -52,12 +65,44 @@ const Cryptocurrencies = ({simplified}) => {
   }
 
 
+
+  
+  useEffect(() => {
+    setCryptos(cryptosCoingecko)
+
+    const filteredData = cryptosCoingecko?.filter((coin)=>
+        coin.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+      || 
+        coin.symbol.toLowerCase().includes(searchTerm.toLowerCase()) 
+    )
+
+    setCryptos(filteredData);
+
+  }, [cryptosCoingecko,searchTerm,page]);
+
+
+  
+  if (isFetching) return '...Loading';
+
+
+
+
+
+
+
   return (
       <>
 
       {!simplified&& (
            <div className="search-crypto" hidden={simplified}>
-           <Input placeholder="Search Cryptocurrency" onChange={(e)=>setSearchTerm(e.target.value)}/>
+
+           <Input placeholder="Search Cryptocurrency" onChange={(e)=>setSearchTerm(e.target.value)} />
+
+           <AutoComplete options={options} onSelect={onSelect}  onSearch={onSearch}
+                        allowClear
+                        placeholder="Search...."
+                        style={{width:200}}/>
+
          </div>
       )}
        
