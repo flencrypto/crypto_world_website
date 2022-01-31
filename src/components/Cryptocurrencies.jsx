@@ -3,20 +3,21 @@ import millify from "millify";
 import { Link } from "react-router-dom";
 import { Card,Row,Col, Input } from "antd";
  import { Pagination } from 'antd';
-import ReactPaginate from "react-paginate";
 
 import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
 
 const Cryptocurrencies = ({simplified}) => {
 
-  const per_page = simplified ? 10 :20;
+  // const per_page = simplified ? 10 :20;
+
+  const [per_page, setPer_page] = useState(simplified ? 10 :100);
   const [page, setPage] = useState(1);
   const [cryptos, setCryptos] = useState();
   const [searchTerm, setSearchTerm] = useState('');
 
   const {data:cryptosCoingecko, isFetching} = useGetCryptosCoingeckoQuery({page,per_page});
 
-  const {data:allCryptos,isFetching:isFetchingCoinList} = useGetAllCryptosCoingeckoQuery();
+  const {data:allCryptos,isFetching:isFetchingAllCryptos} = useGetAllCryptosCoingeckoQuery();
 
 
   
@@ -40,8 +41,10 @@ const Cryptocurrencies = ({simplified}) => {
 
 
 
-  const  onShowSizeChange = (current, pageSize) =>{
+  const onShowSizeChange = (current, pageSize) =>{
     console.log(current, pageSize);
+
+    setPer_page(pageSize)
   }
 
   const onPageChange = (page) => {
@@ -83,12 +86,12 @@ const Cryptocurrencies = ({simplified}) => {
         <div>
 
             <Pagination
-              showSizeChanger = {false}
+              showSizeChanger = {true}
               current={page}
-              // onShowSizeChange={onShowSizeChange}
+              onShowSizeChange={onShowSizeChange}
               pageSize={per_page}
               defaultCurrent={1}
-              total={allCryptos.length} //total
+              total={allCryptos?.length} //total cryptos 
               onChange={onPageChange}
             />
 
