@@ -5,7 +5,7 @@ import { Card,Row,Col, Input } from "antd";
  import { Pagination } from 'antd';
 import ReactPaginate from "react-paginate";
 
-import { useGetCryptosCoingeckoQuery,useGetCryptosListCoingeckoQuery } from "../services/cryptoApi";
+import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
 
 const Cryptocurrencies = ({simplified}) => {
 
@@ -14,16 +14,16 @@ const Cryptocurrencies = ({simplified}) => {
   const [cryptos, setCryptos] = useState();
   const [searchTerm, setSearchTerm] = useState('');
 
-  const {data:cryptoListCoingecko, isFetching} = useGetCryptosCoingeckoQuery({page,per_page});
+  const {data:cryptosCoingecko, isFetching} = useGetCryptosCoingeckoQuery({page,per_page});
 
-  // const {data:coinList,isFetching:isFetchingCoinList}
+  const {data:allCryptos,isFetching:isFetchingCoinList} = useGetAllCryptosCoingeckoQuery();
 
-  console.log(cryptoListCoingecko)
+
   
   useEffect(() => {
-    setCryptos(cryptoListCoingecko)
+    setCryptos(cryptosCoingecko)
 
-    const filteredData = cryptoListCoingecko?.filter((coin)=>
+    const filteredData = cryptosCoingecko?.filter((coin)=>
         coin.name.toLowerCase().includes(searchTerm.toLowerCase()) 
       || 
         coin.symbol.toLowerCase().includes(searchTerm.toLowerCase()) 
@@ -32,7 +32,7 @@ const Cryptocurrencies = ({simplified}) => {
 
     setCryptos(filteredData);
 
-  }, [cryptoListCoingecko,searchTerm,page]);
+  }, [cryptosCoingecko,searchTerm,page]);
 
     
   
@@ -88,7 +88,7 @@ const Cryptocurrencies = ({simplified}) => {
               // onShowSizeChange={onShowSizeChange}
               pageSize={per_page}
               defaultCurrent={1}
-              total={10000} //total
+              total={allCryptos.length} //total
               onChange={onPageChange}
             />
 

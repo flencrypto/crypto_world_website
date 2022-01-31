@@ -48,7 +48,7 @@ export const cryptoApiCoingecko = createApi({
             query: ({page,per_page}) => createSecondRequest(`/coins/markets?page=${page}&per_page=${per_page}`),
         }),
 
-        getCryptosListCoingecko: builder.query({
+        getAllCryptosCoingecko: builder.query({
             query: () => createSecondRequest('/coins/list'),
         }),
     })
@@ -56,7 +56,7 @@ export const cryptoApiCoingecko = createApi({
 
 export const {
     useGetCryptosCoingeckoQuery,
-    useGetCryptosListCoingeckoQuery,
+    useGetAllCryptosCoingeckoQuery,
 } = cryptoApiCoingecko;
 
 
