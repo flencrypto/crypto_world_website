@@ -2,13 +2,16 @@ import React,{useState,useEffect} from "react";
 import millify from "millify";
 import { Link } from "react-router-dom";
 import { Card,Row,Col, Input } from "antd";
- import { Pagination,AutoComplete } from 'antd';
+ import { Pagination,AutoComplete } from 'antd'
+ 
+import { Redirect } from 'react-router-dom';
 
 import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
 
+
+
 const Cryptocurrencies = ({simplified}) => {
 
-  // const per_page = simplified ? 10 :20;
 
   const [per_page, setPer_page] = useState(simplified ? 10 :100);
   const [page, setPage] = useState(1);
@@ -45,6 +48,10 @@ const Cryptocurrencies = ({simplified}) => {
 
   const onSelect = (data) => {
     console.log('onSelect', data);
+
+      <Redirect to={`/crypto/btc`}/>
+    
+    
   };
 
   const onChange = (data) => {
@@ -66,7 +73,6 @@ const Cryptocurrencies = ({simplified}) => {
 
 
 
-  
   useEffect(() => {
     setCryptos(cryptosCoingecko)
 
@@ -81,11 +87,8 @@ const Cryptocurrencies = ({simplified}) => {
   }, [cryptosCoingecko,searchTerm,page]);
 
 
-  
+    
   if (isFetching) return '...Loading';
-
-
-
 
 
 
