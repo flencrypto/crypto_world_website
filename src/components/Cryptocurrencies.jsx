@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import millify from "millify";
 import { Card,Row,Col, Input, Pagination,AutoComplete,Table  } from "antd";
 import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 import { SearchOutlined } from "@ant-design/icons/lib/icons";
 
 
@@ -43,29 +43,12 @@ const Cryptocurrencies = ({simplified}) => {
     
   };
 
-  // const onChange = (data) => {
-  //   console.log(data)
-    
-  // };
   const  history = useHistory();
-
   const onSelect = (data) => {
       if ( data !== '') {
           history.push(`/crypto/${data}`)
       }
   };
-
-
-  //Pagination
-
-//   const onShowSizeChange = (current, pageSize) =>{
-
-//     setPer_page(pageSize)
-//   }
-
-//   const onPageChange = (page) => {
-//     setPage(page)
-//   }
 
 
 
@@ -86,14 +69,13 @@ const Cryptocurrencies = ({simplified}) => {
     
   if (isFetching) return '...Loading';
 
-  console.log(cryptos)
-  const tableData = []
 
+  //Table
+  const tableData = []
   cryptos?.map((coin,index)=>tableData.push({
     key:index,
     ranked_by_market_cap: coin?.market_cap_rank,
-    id:coin?.id,
-    name:<><img alt='' className="crypto-image" src={coin?.image}/> {coin?.name}</>,
+    name:<><Link to={`/crypto/${coin?.id}`}><img alt='' className="crypto-image" src={coin?.image}/> {coin?.name}</Link></>,
     symbol:coin?.symbol.toUpperCase(),
     market_cap: millify(coin?.market_cap),
     current_price: millify(coin?.current_price),
@@ -104,27 +86,34 @@ const columns = [
     {
         title: '#',
         dataIndex: 'ranked_by_market_cap',
+        key:'ranked_by_market_cap'
       },
     {
       title: 'Name',
       dataIndex: 'name' ,
+      key: 'name',
     },
     {
         title: 'Symbol',
         dataIndex: 'symbol',
+        key: 'symbol',
       },
     {
         title: 'Price',
         dataIndex: 'current_price' ,
+        key: 'current_price',
+        
     },
     {
         title: '24h Change',
         dataIndex: 'price_change_percentage_24h',
+        key: 'price_change_percentage_24h',
     },
     
     {
       title: 'Market Cap',
       dataIndex: 'market_cap',
+      key: 'market_cap',
     },
   ];
 
