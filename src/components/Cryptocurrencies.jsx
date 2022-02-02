@@ -101,9 +101,9 @@ const Cryptocurrencies = ({simplified}) => {
       {!simplified&& (
            <div className="search-crypto" hidden={simplified}>
 
-           <Input placeholder="Search Cryptocurrency" onChange={(e)=>setSearchTerm(e.target.value)} />
+           <Input allowClear placeholder="Search Cryptocurrency" onChange={(e)=>setSearchTerm(e.target.value)} />
 
-           <AutoComplete options={options} onSelect={onSelect}  onSearch={onSearch}
+           <AutoComplete hidden={true} options={options} onSelect={onSelect}  onSearch={onSearch}
                         allowClear
                         placeholder="Search...."
                         style={{width:200}}/>

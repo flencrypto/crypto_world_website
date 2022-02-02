@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { cryptoApi } from "../services/cryptoApi";
-import { cryptoApiCoingecko } from "../services/cryptoApi";
+import { cryptoApi,cryptoApiCoingecko } from "../services/cryptoApi";
+import { newsApi } from "../services/newsApi";
 
 
 export default configureStore({
     reducer: {
         [cryptoApi.reducerPath]: cryptoApi.reducer,
         [cryptoApiCoingecko.reducerPath]: cryptoApiCoingecko.reducer,
+        [newsApi.reducerPath]: newsApi.reducer
     },
-    middleware: (getDefaultMiddleware)=> getDefaultMiddleware().concat(cryptoApi.middleware).concat(cryptoApiCoingecko.middleware)
+    middleware: (getDefaultMiddleware)=> getDefaultMiddleware().concat(cryptoApi.middleware).concat(cryptoApiCoingecko.middleware).concat(newsApi.middleware)
 })
