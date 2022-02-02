@@ -92,9 +92,6 @@ const Cryptocurrencies = ({simplified}) => {
     
   if (isFetching) return '...Loading';
 
-
-
-
   return (
       <>
 
@@ -102,25 +99,22 @@ const Cryptocurrencies = ({simplified}) => {
            <div className="search-crypto" hidden={simplified}>
 
            <Input hidden allowClear placeholder="Search Cryptocurrency" onChange={(e)=>setSearchTerm(e.target.value)} />
-
            <AutoComplete hidden={false}
-                     onSelect={onSelect}  onSearch={onSearch}
-                    //  onChange={onChange}
-                        // allowClear
+                        onSelect={onSelect}  onSearch={onSearch}
+                        //  onChange={onChange}
+                        allowClear
                         placeholder={<><SearchOutlined /> Search...</>}
                         style={{width:300}}>
                           
-                      
-                      {options.map((option)=> (                
+                  
+                      {options.map((option,i)=> (                    
                         <Option key={option.id} value={option.id}>
                           {/* value={option.name + ' (' + option.symbol.toUpperCase() + ')'} */}
-                          <Search value={option.name + ' (' + option.symbol.toUpperCase() + ')'}></Search>
+                          <Input value={option.name + ' (' + option.symbol.toUpperCase() + ')'}></Input>
                         </Option>
                       ))}
 
-                        
-
-            </AutoComplete>
+         </AutoComplete>
 
          </div>
       )}
