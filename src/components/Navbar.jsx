@@ -8,11 +8,11 @@ const Navbar = () => {
   return (
             <div className="nav-container">
                 <div className="logo-container">
-                    <img className="logo" src={btc_icon} alt="logo"/>
+                    <Link to="/"> 
+                        <img className="logo" src={btc_icon} alt="logo"/>
                     
-                    <Link to="/"> Crypto World</Link> 
-                    
-                    {/* <Button className="menu-control-container"></Button> */}
+                        Crypto World
+                    </Link> 
                 </div>
 
                 <Menu theme="dark">

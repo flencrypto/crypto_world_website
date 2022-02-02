@@ -14,18 +14,13 @@ const Cryptocurrencies = ({simplified}) => {
   const [cryptos, setCryptos] = useState();
   const [searchTerm, setSearchTerm] = useState('');
 
- 
-
   const {data:cryptosCoingecko, isFetching} = useGetCryptosCoingeckoQuery({page,per_page});
 
   const {data:allCryptos} = useGetAllCryptosCoingeckoQuery();
 
 
-
-
   //Autocomplete
-  const [options, setOptions] = useState([]); //options is list of object with {value:<value>}
-  // const [cryptoArray, setCryptoArray] = useState([]);
+  const [options, setOptions] = useState([]);
   
   const onSearch = (searchText) => {
     const filteredData = allCryptos?.filter((coin)=>
@@ -74,12 +69,12 @@ const Cryptocurrencies = ({simplified}) => {
   const tableData = []
   cryptos?.map((coin,index)=>tableData.push({
     key:index,
-    ranked_by_market_cap: coin?.market_cap_rank,
+    ranked_by_market_cap: coin?.market_cap_rank||'No Rank',
     name:<><Link to={`/crypto/${coin?.id}`}><img alt='' className="crypto-image" src={coin?.image}/> {coin?.name}</Link></>,
     symbol:coin?.symbol.toUpperCase(),
-    market_cap: millify(coin?.market_cap),
-    current_price: millify(coin?.current_price),
-    price_change_percentage_24h: millify(coin?.price_change_percentage_24h)+'%',
+    market_cap: (coin?.market_cap)?millify(coin?.market_cap):'Null',
+    current_price: (coin?.current_price)?millify(coin?.current_price):'Null',
+    price_change_percentage_24h: (coin?.market_cap_change_percentage_24h)?millify(coin?.price_change_percentage_24h)+'%':'Null',
   }))
 
 const columns = [
