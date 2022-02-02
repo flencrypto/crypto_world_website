@@ -3,16 +3,14 @@ import millify from "millify";
 import { Link } from "react-router-dom";
 import { Card,Row,Col, Input } from "antd";
  import { Pagination,AutoComplete } from 'antd'
- 
 import { Redirect } from 'react-router-dom';
-
 import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
+import { useHistory } from "react-router-dom";
 
 
+const {Option} = AutoComplete;
 
 const Cryptocurrencies = ({simplified}) => {
-
-
   const [per_page, setPer_page] = useState(simplified ? 10 :100);
   const [page, setPage] = useState(1);
   const [cryptos, setCryptos] = useState();
@@ -42,22 +40,30 @@ const Cryptocurrencies = ({simplified}) => {
         ) 
     console.log(filteredData)
     let cryptoArray = [];
-    filteredData.map((coin)=>cryptoArray.push({value:coin.name+ ' (' + coin.symbol.toUpperCase() +')'}))
+    filteredData.map((coin)=>cryptoArray.push(coin.name+ ' (' + coin.symbol.toUpperCase() +')'))
+    // filteredData.map((coin)=>cryptoArray.push({value:coin.name+ ' (' + coin.symbol.toUpperCase() +')'}))
 
      setOptions(!searchText ? [] : cryptoArray)    
     
   };
 
+  // const onSelect = (data) => {
+  //   console.log('onSelect', data);
+
+  //     <Redirect to={`/crypto/btc`}/>
+    
+    
+  // };
+  const  history = useHistory();
+
   const onSelect = (data) => {
-    console.log('onSelect', data);
+    // setValue(data);
+      if ( data !== '') {
+          history(`{/crypto/${data}}`)
 
-      <Redirect to={`/crypto/btc`}/>
-    
-    
-  };
+          // window.location.href = `{/crypto/${data}}`;
 
-  const onChange = (data) => {
-    setValue(data);
+      }
   };
 
 
@@ -103,10 +109,20 @@ const Cryptocurrencies = ({simplified}) => {
 
            <Input allowClear placeholder="Search Cryptocurrency" onChange={(e)=>setSearchTerm(e.target.value)} />
 
-           <AutoComplete hidden={true} options={options} onSelect={onSelect}  onSearch={onSearch}
+           <AutoComplete hidden={false}
+                     onSelect={onSelect}  onSearch={onSearch}
                         allowClear
                         placeholder="Search...."
-                        style={{width:200}}/>
+                        style={{width:200}}>
+                      
+                      {options.map((option)=> (
+                        <>                  
+                        <Option key={option} value = {option}>
+                        </Option>
+                        </>
+                      ))}
+
+            </AutoComplete>
 
          </div>
       )}

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {Select, Typography, Row,Col,Avatar,Card} from 'antd';
 import moment from "moment";
 import { useGetNewsQuery } from "../services/newsApi";
@@ -7,6 +7,7 @@ const {Text,Title} = Typography
 const demoImage = 'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';
 
 const News = ({simplified}) => {
+  const [newsCategory, setNewsCategory] = useState('Cryptocurrency');
   const count = simplified?6:12;
 
   const {data:cryptoNews,isFetching} = useGetNewsQuery({newsCategory:'Cryptocurrency',count:count})
@@ -16,7 +17,14 @@ const News = ({simplified}) => {
 
   return (
     <>
-    {!simplified&& (<h1>Latest Crypto News</h1>)}
+    {!simplified&& (
+      <>
+      <h1>Latest Crypto News</h1>
+      <Col>
+        <Select></Select>
+      </Col>
+      </>
+    )}
 
     <Row gutter={[24,24]}>
           {cryptoNews?.value?.map((news,i)=>(
