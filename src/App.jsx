@@ -3,7 +3,7 @@ import './App.css'
 import {Switch,Route,Link} from 'react-router-dom'
 import { Layout,Typography, Space } from "antd"
 
-import { Navbar,Exchanges,Homepage, Cryptocurrencies,CryptoDetails, News,NotFound } from "./components"
+import { Navbar,Exchanges,Homepage, Cryptocurrencies,CryptoDetails, News,NotFound,Test } from "./components"
 
 
 const App = () => {
@@ -34,6 +34,10 @@ const App = () => {
                   </Route>
                   <Route exact path='/news'>
                     <News/>
+                  </Route>
+
+                  <Route exact path='/test'>
+                    <Test/>
                   </Route>
 
                   {/* If the routes is not found or other routes */}

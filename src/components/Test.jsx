@@ -10,7 +10,7 @@ import { SearchOutlined } from "@ant-design/icons/lib/icons";
 const {Option} = AutoComplete; 
 const {Search} = Input;
 
-const Cryptocurrencies = ({simplified}) => {
+const Test = ({simplified}) => {
   const [per_page, setPer_page] = useState(simplified ? 10 :100);
   const [page, setPage] = useState(1);
   const [cryptos, setCryptos] = useState();
@@ -175,4 +175,4 @@ const Cryptocurrencies = ({simplified}) => {
   );
 };
 
-export default Cryptocurrencies;
+export default Test;
