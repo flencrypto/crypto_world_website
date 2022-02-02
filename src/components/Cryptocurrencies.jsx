@@ -1,14 +1,15 @@
 import React,{useState,useEffect} from "react";
 import millify from "millify";
 import { Link } from "react-router-dom";
-import { Card,Row,Col, Input } from "antd";
- import { Pagination,AutoComplete } from 'antd'
+import { Card,Row,Col, Input, Pagination,AutoComplete  } from "antd";
 import { Redirect } from 'react-router-dom';
 import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
 import { useHistory } from "react-router-dom";
+import { SearchOutlined } from "@ant-design/icons/lib/icons";
 
 
-const {Option} = AutoComplete;
+const {Option} = AutoComplete; 
+const {Search} = Input;
 
 const Cryptocurrencies = ({simplified}) => {
   const [per_page, setPer_page] = useState(simplified ? 10 :100);
@@ -38,31 +39,24 @@ const Cryptocurrencies = ({simplified}) => {
       || 
         coin.symbol.toLowerCase().startsWith(searchText.toLowerCase())
         ) 
-    console.log(filteredData)
-    let cryptoArray = [];
-    filteredData.map((coin)=>cryptoArray.push(coin.name+ ' (' + coin.symbol.toUpperCase() +')'))
+    // console.log({'filteredData':filteredData})
+    // let cryptoArray = [];
+    // filteredData.map((coin)=>cryptoArray.push(coin.name+ ' (' + coin.symbol.toUpperCase() +')'))
     // filteredData.map((coin)=>cryptoArray.push({value:coin.name+ ' (' + coin.symbol.toUpperCase() +')'}))
 
-     setOptions(!searchText ? [] : cryptoArray)    
+     setOptions(!searchText ? [] : filteredData)    
     
   };
 
-  // const onSelect = (data) => {
-  //   console.log('onSelect', data);
-
-  //     <Redirect to={`/crypto/btc`}/>
-    
+  // const onChange = (data) => {
+  //   console.log(data)
     
   // };
   const  history = useHistory();
 
   const onSelect = (data) => {
-    // setValue(data);
       if ( data !== '') {
-          history(`{/crypto/${data}}`)
-
-          // window.location.href = `{/crypto/${data}}`;
-
+          history.push(`/crypto/${data}`)
       }
   };
 
@@ -107,20 +101,24 @@ const Cryptocurrencies = ({simplified}) => {
       {!simplified&& (
            <div className="search-crypto" hidden={simplified}>
 
-           <Input allowClear placeholder="Search Cryptocurrency" onChange={(e)=>setSearchTerm(e.target.value)} />
+           <Input hidden allowClear placeholder="Search Cryptocurrency" onChange={(e)=>setSearchTerm(e.target.value)} />
 
            <AutoComplete hidden={false}
                      onSelect={onSelect}  onSearch={onSearch}
-                        allowClear
-                        placeholder="Search...."
-                        style={{width:200}}>
+                    //  onChange={onChange}
+                        // allowClear
+                        placeholder={<><SearchOutlined /> Search...</>}
+                        style={{width:300}}>
+                          
                       
-                      {options.map((option)=> (
-                        <>                  
-                        <Option key={option} value = {option}>
+                      {options.map((option)=> (                
+                        <Option key={option.id} value={option.id}>
+                          {/* value={option.name + ' (' + option.symbol.toUpperCase() + ')'} */}
+                          <Search value={option.name + ' (' + option.symbol.toUpperCase() + ')'}></Search>
                         </Option>
-                        </>
                       ))}
+
+                        
 
             </AutoComplete>
 
