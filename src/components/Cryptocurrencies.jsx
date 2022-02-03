@@ -70,11 +70,13 @@ const Cryptocurrencies = ({simplified}) => {
   cryptos?.map((coin,index)=>tableData.push({
     key:index,
     ranked_by_market_cap: coin?.market_cap_rank||'No Rank',
-    name:<><Link to={`/crypto/${coin?.id}`}><img alt='' className="crypto-image" src={coin?.image}/> {coin?.name}</Link></>,
+    name:<><Link to={`/crypto/${coin?.id}`}>
+              <img alt='' className="crypto-image" src={coin?.image}/> {coin?.name}
+            </Link></>,
     symbol:coin?.symbol.toUpperCase()||'Null',
-    current_price: (coin?.current_price)?(coin?.current_price):'Null',
+    current_price: (coin?.current_price)?(coin?.current_price).toLocaleString("en-US",{style: "currency",currency: "usd"}):'Null',
     price_change_percentage_24h: (coin?.market_cap_change_percentage_24h)?(coin?.price_change_percentage_24h):'Null',
-    market_cap: (coin?.market_cap)?(coin?.market_cap):'Null',
+    market_cap: (coin?.market_cap)?'$'+(coin?.market_cap).toLocaleString("en-US",{style: "decimal",currency: "usd"}):'Null',
   }))
 
   // const coinNameArray = []
@@ -113,7 +115,15 @@ const columns = [
         title: 'Price',
         dataIndex:'current_price',
         key: 'current_price',
-        sorter: (a, b) => a.current_price - b.current_price,
+        sorter: (a, b) =>  Number(a.current_price.replace(/[$,]/g, '')) - Number(b.current_price.replace(/[$,]/g, ''))
+        // { 
+        //   const c = Number(a.current_price.replace(/[$,]/g, ''))
+          
+        //   const d = Number(b.current_price.replace(/[$,]/g, ''))
+        //   console.log(c,d)
+    
+        // //  a.current_price - b.current_price,
+        // }
         
     },
     {
@@ -124,10 +134,10 @@ const columns = [
     },
     
     {
-      title: 'Market Cap',
+      title: 'Market Cap', 
       dataIndex: 'market_cap',
       key: 'market_cap',
-      sorter: (a,b) => b.market_cap- a.market_cap
+      sorter: (a,b) => Number(a.market_cap.replace(/[$,]/g, '')) - Number(b.market_cap.replace(/[$,]/g, ''))
     },
   ];
 
