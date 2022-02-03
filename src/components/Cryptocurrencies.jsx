@@ -71,16 +71,15 @@ const Cryptocurrencies = ({simplified}) => {
     key:index,
     ranked_by_market_cap: coin?.market_cap_rank||'No Rank',
     name:<><Link to={`/crypto/${coin?.id}`}><img alt='' className="crypto-image" src={coin?.image}/> {coin?.name}</Link></>,
-    symbol:coin?.symbol.toUpperCase(),
-    market_cap: (coin?.market_cap)?millify(coin?.market_cap):'Null',
-    current_price: (coin?.current_price)?millify(coin?.current_price):'Null',
-    price_change_percentage_24h: (coin?.market_cap_change_percentage_24h)?millify(coin?.price_change_percentage_24h):'Null',
+    symbol:coin?.symbol.toUpperCase()||'Null',
+    current_price: (coin?.current_price)?(coin?.current_price):'Null',
+    price_change_percentage_24h: (coin?.market_cap_change_percentage_24h)?(coin?.price_change_percentage_24h):'Null',
+    market_cap: (coin?.market_cap)?(coin?.market_cap):'Null',
   }))
 
-  const coinNameArray = []
-  cryptos?.map((coin)=> coinNameArray.push({text:coin?.symbol,value:coin?.symbol}))
+  // const coinNameArray = []
+  // cryptos?.map((coin)=> coinNameArray.push({text:coin?.symbol,value:coin?.symbol}))
 
-  console.log(coinNameArray)
 
 const columns = [
     {
@@ -89,16 +88,15 @@ const columns = [
         key:'ranked_by_market_cap',
         // defaultSortOrder: 'descend',
         sorter: (a, b) => a.ranked_by_market_cap - b.ranked_by_market_cap,
-        sortDirections: [ 'descend','ascend'],
       },
     {
       title: 'Name',
-      dataIndex: 'name' ,
+      dataIndex: 'name',
       key: 'name',
     },
     {
       title: 'Symbol',
-      dataIndex: 'symbol' ,
+      dataIndex: 'symbol',
       key: 'symbol',
       sorter: (a, b) =>{
         if (a.symbol < b.symbol) {
@@ -113,7 +111,7 @@ const columns = [
     },
     {
         title: 'Price',
-        dataIndex: 'current_price' ,
+        dataIndex:'current_price',
         key: 'current_price',
         sorter: (a, b) => a.current_price - b.current_price,
         
@@ -122,14 +120,14 @@ const columns = [
         title: '24h Change (%)',
         dataIndex: 'price_change_percentage_24h',
         key: 'price_change_percentage_24h',
-        sorter: (a, b) => a.price_change_percentage_24h - b.price_change_percentage_24h,
+        sorter: (a, b) => a.price_change_percentage_24h -b.price_change_percentage_24h,
     },
     
     {
       title: 'Market Cap',
       dataIndex: 'market_cap',
       key: 'market_cap',
-      sorter: (a,b) => a.market_cap - b.market_cap
+      sorter: (a,b) => b.market_cap- a.market_cap
     },
   ];
 
