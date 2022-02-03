@@ -70,7 +70,8 @@ const Cryptocurrencies = ({simplified}) => {
   cryptos?.map((coin,index)=>tableData.push({
     key:index,
     ranked_by_market_cap: coin?.market_cap_rank||'No Rank',
-    name:<><Link to={`/crypto/${coin?.id}`}><img alt='' className="crypto-image" src={coin?.image}/> {coin?.name}</Link> ({coin?.symbol.toUpperCase()})</>,
+    name:<><Link to={`/crypto/${coin?.id}`}><img alt='' className="crypto-image" src={coin?.image}/> {coin?.name}</Link></>,
+    symbol:coin?.symbol.toUpperCase(),
     market_cap: (coin?.market_cap)?millify(coin?.market_cap):'Null',
     current_price: (coin?.current_price)?millify(coin?.current_price):'Null',
     price_change_percentage_24h: (coin?.market_cap_change_percentage_24h)?millify(coin?.price_change_percentage_24h):'Null',
@@ -79,6 +80,8 @@ const Cryptocurrencies = ({simplified}) => {
   const coinNameArray = []
   cryptos?.map((coin)=> coinNameArray.push({text:coin?.symbol,value:coin?.symbol}))
 
+  console.log(coinNameArray)
+
 const columns = [
     {
         title: '#',
@@ -86,13 +89,27 @@ const columns = [
         key:'ranked_by_market_cap',
         // defaultSortOrder: 'descend',
         sorter: (a, b) => a.ranked_by_market_cap - b.ranked_by_market_cap,
+        sortDirections: [ 'descend','ascend'],
       },
     {
       title: 'Name',
       dataIndex: 'name' ,
       key: 'name',
-      sorter: (a, b) => a.name.length - b.name.length,
-      sortDirections: ['ascend', 'descend'],
+    },
+    {
+      title: 'Symbol',
+      dataIndex: 'symbol' ,
+      key: 'symbol',
+      sorter: (a, b) =>{
+        if (a.symbol < b.symbol) {
+          return -1;
+        }
+        if (a.symbol > b.symbol) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      },
     },
     {
         title: 'Price',
@@ -112,7 +129,7 @@ const columns = [
       title: 'Market Cap',
       dataIndex: 'market_cap',
       key: 'market_cap',
-      sorter: (a, b) => a.market_cap - b.market_cap,
+      sorter: (a,b) => a.market_cap - b.market_cap
     },
   ];
 
