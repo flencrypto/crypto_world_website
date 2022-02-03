@@ -9,7 +9,7 @@ import { SearchOutlined } from "@ant-design/icons/lib/icons";
 const {Option} = AutoComplete; 
 
 const Cryptocurrencies = ({simplified}) => {
-  const [per_page, setPer_page] = useState(simplified ? 10 :100);
+  const [per_page, setPer_page] = useState(simplified ? 10 :50);
   const [page, setPage] = useState(1);
   const [cryptos, setCryptos] = useState();
   const [searchTerm, setSearchTerm] = useState('');
@@ -70,48 +70,51 @@ const Cryptocurrencies = ({simplified}) => {
   cryptos?.map((coin,index)=>tableData.push({
     key:index,
     ranked_by_market_cap: coin?.market_cap_rank||'No Rank',
-    name:<><Link to={`/crypto/${coin?.id}`}><img alt='' className="crypto-image" src={coin?.image}/> {coin?.name}</Link></>,
-    symbol:coin?.symbol.toUpperCase(),
+    name:<><Link to={`/crypto/${coin?.id}`}><img alt='' className="crypto-image" src={coin?.image}/> {coin?.name}</Link> ({coin?.symbol.toUpperCase()})</>,
     market_cap: (coin?.market_cap)?millify(coin?.market_cap):'Null',
     current_price: (coin?.current_price)?millify(coin?.current_price):'Null',
-    price_change_percentage_24h: (coin?.market_cap_change_percentage_24h)?millify(coin?.price_change_percentage_24h)+'%':'Null',
+    price_change_percentage_24h: (coin?.market_cap_change_percentage_24h)?millify(coin?.price_change_percentage_24h):'Null',
   }))
+
+  const coinNameArray = []
+  cryptos?.map((coin)=> coinNameArray.push({text:coin?.symbol,value:coin?.symbol}))
 
 const columns = [
     {
         title: '#',
         dataIndex: 'ranked_by_market_cap',
-        key:'ranked_by_market_cap'
+        key:'ranked_by_market_cap',
+        // defaultSortOrder: 'descend',
+        sorter: (a, b) => a.ranked_by_market_cap - b.ranked_by_market_cap,
       },
     {
       title: 'Name',
       dataIndex: 'name' ,
       key: 'name',
+      sorter: (a, b) => a.name.length - b.name.length,
+      sortDirections: ['ascend', 'descend'],
     },
-    {
-        title: 'Symbol',
-        dataIndex: 'symbol',
-        key: 'symbol',
-      },
     {
         title: 'Price',
         dataIndex: 'current_price' ,
         key: 'current_price',
+        sorter: (a, b) => a.current_price - b.current_price,
         
     },
     {
-        title: '24h Change',
+        title: '24h Change (%)',
         dataIndex: 'price_change_percentage_24h',
         key: 'price_change_percentage_24h',
+        sorter: (a, b) => a.price_change_percentage_24h - b.price_change_percentage_24h,
     },
     
     {
       title: 'Market Cap',
       dataIndex: 'market_cap',
       key: 'market_cap',
+      sorter: (a, b) => a.market_cap - b.market_cap,
     },
   ];
-
 
 
   return (
