@@ -35,9 +35,9 @@ const App = () => {
                     <News/>
                   </Route>
 
-                  {/* <Route exact path='/test'>
+                  <Route exact path='/test'>
                     <Test/>
-                  </Route> */}
+                  </Route>
 
                   {/* If the routes is not found or other routes */}
                   <Route path="*">

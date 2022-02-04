@@ -1,27 +1,32 @@
 import React,{useState} from "react";
-import {Select, Typography, Row,Col,Avatar,Card} from 'antd';
+import {Typography, Row,Col,Avatar,Card} from 'antd';
 import moment from "moment";
 import { useGetNewsQuery } from "../services/newsApi";
+import AutoCompleteComp from './AutoCompleteComp'
 
 const {Text,Title} = Typography
 const demoImage = 'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';
 
 const News = ({simplified}) => {
+  const onPage = 'News';
   const [newsCategory, setNewsCategory] = useState('Cryptocurrency');
   const count = simplified?6:12;
 
   const {data:cryptoNews,isFetching} = useGetNewsQuery({newsCategory:'Cryptocurrency',count:count})
 
   if (isFetching) return 'Loading'
+  
 
   return (
     <>
     {!simplified&& (
       <>
-      <h1>Latest Crypto News</h1>
-      <Col>
-        <Select></Select>
-      </Col>
+      
+      <div className="search-crypto">
+            <h1>Latest Crypto News</h1>
+           <AutoCompleteComp onPage={onPage} setNewsCategory={setNewsCategory}></AutoCompleteComp>
+
+         </div>
       </>
     )}
 

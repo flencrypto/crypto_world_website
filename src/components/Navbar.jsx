@@ -32,9 +32,9 @@ const Navbar = () => {
                         <Link to='/news'>News</Link>
                     </Menu.Item>
 
-                    {/* <Menu.Item key='test' icon={<BulbOutlined/>}>
+                    <Menu.Item key='test' icon={<BulbOutlined/>}>
                         <Link to='/test'>Test</Link>
-                    </Menu.Item> */}
+                    </Menu.Item>
                 </Menu>
       
             </div>

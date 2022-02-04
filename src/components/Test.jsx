@@ -1,12 +1,9 @@
 import React,{useState,useEffect} from "react";
 import millify from "millify";
-import { Card,Row,Col, Input, Pagination,AutoComplete,Table  } from "antd";
+import { Card,Row,Col, Input, Pagination,Table  } from "antd";
 import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
-import { useHistory } from "react-router-dom";
-import { SearchOutlined } from "@ant-design/icons/lib/icons";
+import AutoCompleteComp from "./AutoCompleteComp";
 
-
-const {Option} = AutoComplete; 
 
 const Test = ({simplified}) => {
   const [per_page, setPer_page] = useState(simplified ? 10 :100);
@@ -14,58 +11,12 @@ const Test = ({simplified}) => {
   const [cryptos, setCryptos] = useState();
   const [searchTerm, setSearchTerm] = useState('');
 
- 
 
   const {data:cryptosCoingecko, isFetching} = useGetCryptosCoingeckoQuery({page,per_page});
 
   const {data:allCryptos} = useGetAllCryptosCoingeckoQuery();
 
 
-
-
-  //Autocomplete
-  const [options, setOptions] = useState([]); //options is list of object with {value:<value>}
-  // const [cryptoArray, setCryptoArray] = useState([]);
-  
-  const onSearch = (searchText) => {
-    const filteredData = allCryptos?.filter((coin)=>
-        coin.name.toLowerCase().startsWith(searchText.toLowerCase()) 
-        
-      || 
-        coin.symbol.toLowerCase().startsWith(searchText.toLowerCase())
-        ) 
-    // console.log({'filteredData':filteredData})
-    // let cryptoArray = [];
-    // filteredData.map((coin)=>cryptoArray.push(coin.name+ ' (' + coin.symbol.toUpperCase() +')'))
-    // filteredData.map((coin)=>cryptoArray.push({value:coin.name+ ' (' + coin.symbol.toUpperCase() +')'}))
-
-     setOptions(!searchText ? [] : filteredData)    
-    
-  };
-
-  // const onChange = (data) => {
-  //   console.log(data)
-    
-  // };
-  const  history = useHistory();
-
-  const onSelect = (data) => {
-      if ( data !== '') {
-          history.push(`/crypto/${data}`)
-      }
-  };
-
-
-  //Pagination
-
-//   const onShowSizeChange = (current, pageSize) =>{
-
-//     setPer_page(pageSize)
-//   }
-
-//   const onPageChange = (page) => {
-//     setPage(page)
-//   }
 
 
 
@@ -86,7 +37,8 @@ const Test = ({simplified}) => {
     
   if (isFetching) return '...Loading';
 
-  console.log(cryptos)
+  // console.log(cryptos)
+
   const tableData = []
 
   cryptos?.map((coin,index)=>tableData.push({
@@ -115,7 +67,15 @@ const columns = [
       },
     {
         title: 'Price',
-        dataIndex: 'current_price' ,
+        dataIndex: 'current_price',
+                // { 
+        //   const c = Number(a.current_price.replace(/[$,]/g, ''))
+          
+        //   const d = Number(b.current_price.replace(/[$,]/g, ''))
+        //   console.log(c,d)
+    
+        // //  a.current_price - b.current_price,
+        // }
     },
     {
         title: '24h Change',
@@ -135,26 +95,8 @@ const columns = [
 
       {!simplified&& (
            <div className="search-crypto" hidden={simplified}>
-
-           <Input hidden allowClear placeholder="Search Cryptocurrency" onChange={(e)=>setSearchTerm(e.target.value)} />
-           <AutoComplete hidden={false}
-                        onSelect={onSelect}  onSearch={onSearch}
-                        //  onChange={onChange}
-                        allowClear
-                        placeholder={<> <SearchOutlined/> Search...</>}
-                        style={{width:300}}>
-                          
-                  
-                      {options.map((option,i)=> (                    
-                        <Option key={option.id} value={option.id}>
-                          {/* value={option.name + ' (' + option.symbol.toUpperCase() + ')'} */}
-                          <Input type='submit' 
-                                  bordered={false}  
-                                  value={option.name + ' (' + option.symbol.toUpperCase() + ')'}/>
-                        </Option>
-                      ))}
-
-         </AutoComplete>
+            {/* <Input hidden allowClear placeholder="Search Cryptocurrency" onChange={(e)=>setSearchTerm(e.target.value)} /> */}
+          <AutoCompleteComp></AutoCompleteComp>
 
          </div>
       )}
