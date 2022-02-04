@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import {Switch,Route,Link} from 'react-router-dom'
 import { Layout,Typography, Space } from "antd"
@@ -36,9 +35,9 @@ const App = () => {
                     <News/>
                   </Route>
 
-                  <Route exact path='/test'>
+                  {/* <Route exact path='/test'>
                     <Test/>
-                  </Route>
+                  </Route> */}
 
                   {/* If the routes is not found or other routes */}
                   <Route path="*">

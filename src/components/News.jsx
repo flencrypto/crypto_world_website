@@ -11,7 +11,6 @@ const News = ({simplified}) => {
   const count = simplified?6:12;
 
   const {data:cryptoNews,isFetching} = useGetNewsQuery({newsCategory:'Cryptocurrency',count:count})
-  console.log(cryptoNews)
 
   if (isFetching) return 'Loading'
 
