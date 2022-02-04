@@ -75,7 +75,7 @@ const Cryptocurrencies = ({simplified}) => {
             </Link></>,
     symbol:coin?.symbol.toUpperCase()||'Null',
     current_price: (coin?.current_price)?(coin?.current_price).toLocaleString("en-US",{style: "currency",currency: "usd"}):'Null',
-    price_change_percentage_24h: (coin?.market_cap_change_percentage_24h)?(coin?.price_change_percentage_24h):'Null',
+    price_change_percentage_24h: (coin?.market_cap_change_percentage_24h)?(coin?.price_change_percentage_24h).toFixed(2)+'%':'Null',
     market_cap: (coin?.market_cap)?'$'+(coin?.market_cap).toLocaleString("en-US",{style: "decimal",currency: "usd"}):'Null',
   }))
 
@@ -127,10 +127,10 @@ const columns = [
         
     },
     {
-        title: '24h Change (%)',
+        title: '24h Change',
         dataIndex: 'price_change_percentage_24h',
         key: 'price_change_percentage_24h',
-        sorter: (a, b) => a.price_change_percentage_24h -b.price_change_percentage_24h,
+        sorter: (a, b) => Number(a.price_change_percentage_24h.replace(/%/g, '')) - Number(b.price_change_percentage_24h.replace(/%/g, '')),
     },
     
     {
