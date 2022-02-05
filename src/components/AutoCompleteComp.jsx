@@ -21,10 +21,9 @@ const AutoCompleteComp = ({onPage,setNewsCategory}) => {
     setOptions(!searchText ? [] : filteredData)    
     
   };
-  const  history = useHistory();
 
-  
-    //OnSelect
+  //OnSelect
+  const  history = useHistory();
   const onSelect = (data) => {
     if (onPage==='Cryptocurrencies') {
         if ( data !== '') {
@@ -33,9 +32,9 @@ const AutoCompleteComp = ({onPage,setNewsCategory}) => {
     } 
     
     else if (onPage==='News') {
-        // if ( data !== '') {
+        if ( data !== '') {
             setNewsCategory(data)
-        // }
+        }
     }
 
   };
