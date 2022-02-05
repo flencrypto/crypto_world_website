@@ -3,7 +3,7 @@ import millify from "millify";
 import {Pagination,Table  } from "antd";
 import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
 import { Link } from "react-router-dom";
-import AutoCompleteComp from "./AutoCompleteComp";
+import Autocomplete from "./Autocomplete";
 
 
 
@@ -38,20 +38,21 @@ const Cryptocurrencies = ({simplified}) => {
 
   //Table
   const tableData = []
+
   cryptos?.map((coin,index)=>tableData.push({
     key:index,
     ranked_by_market_cap: coin?.market_cap_rank||'No Rank',
-    name:<><Link to={`/crypto/${coin?.id}`}>
+    name:<Link to={`/crypto/${coin?.id}`}>
               <img alt='' className="crypto-image" src={coin?.image}/> {coin?.name}
-            </Link></>,
+          </Link>,
     symbol:coin?.symbol.toUpperCase()||'Null',
     current_price: (coin?.current_price)?(coin?.current_price).toLocaleString("en-US",{style: "currency",currency: "usd"}):'Null',
-    price_change_percentage_24h: (coin?.market_cap_change_percentage_24h)?(coin?.price_change_percentage_24h).toFixed(2)+'%':'Null',
+    price_change_percentage_24h: (coin?.market_cap_change_percentage_24h)?(coin?.price_change_percentage_24h).toLocaleString("en-US",{maximumFractionDigits: 2})+'%':'Null',
     market_cap: (coin?.market_cap)?'$'+(coin?.market_cap).toLocaleString("en-US",{style: "decimal",currency: "usd"}):'Null',
   }))
 
 
-const columns = [
+  const columns = [
     {
         title: '#',
         dataIndex: 'ranked_by_market_cap',
@@ -84,7 +85,6 @@ const columns = [
         dataIndex:'current_price',
         key: 'current_price',
         sorter: (a, b) =>  Number(a.current_price.replace(/[$,]/g, '')) - Number(b.current_price.replace(/[$,]/g, ''))
-        
     },
     {
         title: '24h Change',
@@ -105,15 +105,15 @@ const columns = [
   return (
       <>
 
-      {!simplified&& (
-           <div className="search-crypto">
+        {!simplified&& (
+            <div className="search-crypto">
 
-           <AutoCompleteComp onPage={onPage}></AutoCompleteComp>
+            <Autocomplete onPage={onPage}></Autocomplete>
 
-         </div>
-      )}
+          </div>
+        )}
 
-    <Table dataSource={tableData} columns={columns} pagination={false} />
+        <Table dataSource={tableData} columns={columns} pagination={false} />
 
         {!simplified&&
         <div>

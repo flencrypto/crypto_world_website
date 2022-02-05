@@ -2,10 +2,11 @@ import React,{useState,useEffect} from "react";
 import millify from "millify";
 import { Card,Row,Col, Input, Pagination,Table  } from "antd";
 import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
-import AutoCompleteComp from "./AutoCompleteComp";
+import Autocomplete from "./Autocomplete";
 
 
 const Test = ({simplified}) => {
+  const onPage = 'Test'
   const [per_page, setPer_page] = useState(simplified ? 10 :100);
   const [page, setPage] = useState(1);
   const [cryptos, setCryptos] = useState();
@@ -96,7 +97,7 @@ const columns = [
       {!simplified&& (
            <div className="search-crypto" hidden={simplified}>
             {/* <Input hidden allowClear placeholder="Search Cryptocurrency" onChange={(e)=>setSearchTerm(e.target.value)} /> */}
-          <AutoCompleteComp></AutoCompleteComp>
+          <Autocomplete onPage={onPage}></Autocomplete>
 
          </div>
       )}
