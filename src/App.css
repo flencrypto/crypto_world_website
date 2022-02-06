@@ -382,13 +382,12 @@ a:hover {
 .crypto-card {
   min-width: 250px;
 }
-.crypto-card  {
+.crypto-card {
   width: 35px;
 }
-.crypto-image{
-  width:35px;
-  height:35px;
-
+.crypto-image {
+  width: 35px;
+  height: 35px;
 }
 .select-timeperiod {
   width: 200px !important;
@@ -406,4 +405,8 @@ a:hover {
   flex-direction: column;
   padding: 20px;
   align-items: center;
+}
+
+.stat {
+  font-weight: 500;
 }
