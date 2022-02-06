@@ -37,6 +37,8 @@ const baseUrlCoingecko = 'https://coingecko.p.rapidapi.com';
 
 const createSecondRequest = (url)=> ({url,headers:cryptoApiHeaderCoingecko,params:params});
 
+const createThirddRequest = (url)=> ({url,headers:cryptoApiHeaderCoingecko});
+
 
 export const cryptoApiCoingecko = createApi({
     reducerPath: 'cryptoApiCoingecko',
@@ -45,12 +47,15 @@ export const cryptoApiCoingecko = createApi({
         getCryptosCoingecko: builder.query({
             query: ({page,per_page}) => createSecondRequest(`/coins/markets?page=${page}&per_page=${per_page}`),
         }),
+        getSpecificCoin: builder.query({
+            query: ({id}) => createSecondRequest(`/coins/${id}`),
+        }),
 
         getAllCryptosCoingecko: builder.query({
             query: () => createSecondRequest('/coins/list'),
         }),
         getExchangesCoingecko: builder.query({
-            query: () => createSecondRequest(`/exchanges`),
+            query: () => createThirddRequest(`/exchanges`),
         }),
     })
 })
@@ -59,6 +64,7 @@ export const {
     useGetCryptosCoingeckoQuery,
     useGetAllCryptosCoingeckoQuery,
     useGetExchangesCoingeckoQuery,
+    useGetSpecificCoinQuery,
 } = cryptoApiCoingecko;
 
 
