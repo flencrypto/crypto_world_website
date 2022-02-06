@@ -31,11 +31,8 @@ const Homepage = () => {
       </Title>
       <Row>
         <Col span={12}><Statistic title="Total Cryptocurrencies" value={(globalStats?.data)?globalStats?.data?.active_cryptocurrencies:'No data'}/></Col>
-        <Col span={12}> Dominance: BTC {(globalStats?.data)?globalStats?.data?.market_cap_percentage?.btc.toLocaleString("en-US",{maximumFractionDigits: 2})+'%':'No data'} ETH {(globalStats?.data)?globalStats?.data?.market_cap_percentage?.eth.toLocaleString("en-US",{maximumFractionDigits: 2})+'%':'No data'}
-          
-          {/* <Statistic title={`Dominance: BTC`}value={(globalStats?.data)?globalStats?.data?.market_cap_percentage?.btc:'No data'}/> */}
-          
-          
+        <Col span={12}> 
+           <Statistic title={`Market Dominance`} value={(globalStats?.data)?'BTC: ' + globalStats?.data?.market_cap_percentage?.btc.toLocaleString("en-US",{maximumFractionDigits: 2})+'% - ETH: ' + globalStats?.data?.market_cap_percentage?.eth.toLocaleString("en-US",{maximumFractionDigits: 2}) + '%' :'No data'}/> 
           </Col>
         <Col span={12}><Statistic title={`Total Market Cap`}
                           value={globalStats?(globalStats?.data?.total_market_cap?.usd).toLocaleString("en-US",{style: "currency",currency: "usd"}):'No data'}/>
