@@ -37,6 +37,7 @@ const baseUrlCoingecko = 'https://coingecko.p.rapidapi.com';
 
 const createSecondRequest = (url)=> ({url,headers:cryptoApiHeaderCoingecko,params:params});
 
+
 export const cryptoApiCoingecko = createApi({
     reducerPath: 'cryptoApiCoingecko',
     baseQuery: fetchBaseQuery({baseUrl:baseUrlCoingecko}),
@@ -48,12 +49,16 @@ export const cryptoApiCoingecko = createApi({
         getAllCryptosCoingecko: builder.query({
             query: () => createSecondRequest('/coins/list'),
         }),
+        getExchangesCoingecko: builder.query({
+            query: () => createSecondRequest(`/exchanges`),
+        }),
     })
 })
 
 export const {
     useGetCryptosCoingeckoQuery,
     useGetAllCryptosCoingeckoQuery,
+    useGetExchangesCoingeckoQuery,
 } = cryptoApiCoingecko;
 
 
