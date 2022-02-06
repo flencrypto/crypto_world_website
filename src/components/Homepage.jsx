@@ -2,7 +2,7 @@ import React from "react";
 import millify from 'millify'
 import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
-import { useGetCryptosQuery,useGetExchangesCoingeckoQuery } from "../services/cryptoApi";
+import { useGetCryptosQuery,useGetGlobalStatCoingeckoQuery } from "../services/cryptoApi";
 // import { useGetCryptosCoingeckoQuery } from "../services/cryptoApi";
 
 
@@ -14,9 +14,12 @@ const {Title} = Typography
 
 const Homepage = () => {
 
-  const {data,isFetching} = useGetCryptosQuery();
-  const globalStats = data?.data?.stats
+  // const {data,isFetching} = useGetCryptosQuery();
+  // const globalStats = data?.data?.stats
 
+  const {data:globalStats,isFetching} = useGetGlobalStatCoingeckoQuery();
+
+  console.log(globalStats?.data)
 
   if (isFetching) return 'Loading...'
  
@@ -27,11 +30,19 @@ const Homepage = () => {
         Global Crypto Stats
       </Title>
       <Row>
-        <Col span={12}><Statistic title="Total Cryptocurrencies" value={globalStats?globalStats.total:'No data'}/></Col>
-        <Col span={12}><Statistic title="Total Exchanges" value={globalStats?globalStats.totalExchanges:'No data'}/></Col>
-        <Col span={12}><Statistic title="Total Market Cap" value={globalStats?millify(globalStats.totalMarketCap):'No data'}/></Col>
-        <Col span={12}><Statistic title="Total 24h Volume" value={globalStats?millify(globalStats.total24hVolume):'No data'}/></Col>
-        <Col span={12}><Statistic title="Total Markets" value={globalStats?globalStats.totalMarkets:'No data'}/></Col>
+        <Col span={12}><Statistic title="Total Cryptocurrencies" value={(globalStats?.data)?globalStats?.data?.active_cryptocurrencies:'No data'}/></Col>
+        <Col span={12}> Dominance: BTC {(globalStats?.data)?globalStats?.data?.market_cap_percentage?.btc.toLocaleString("en-US",{maximumFractionDigits: 2})+'%':'No data'} ETH {(globalStats?.data)?globalStats?.data?.market_cap_percentage?.eth.toLocaleString("en-US",{maximumFractionDigits: 2})+'%':'No data'}
+          
+          {/* <Statistic title={`Dominance: BTC`}value={(globalStats?.data)?globalStats?.data?.market_cap_percentage?.btc:'No data'}/> */}
+          
+          
+          </Col>
+        <Col span={12}><Statistic title={`Total Market Cap`}
+                          value={globalStats?(globalStats?.data?.total_market_cap?.usd).toLocaleString("en-US",{style: "currency",currency: "usd"}):'No data'}/>
+        </Col>
+        <Col span={12}><Statistic title="Total 24h Volume" 
+                          value={globalStats?(globalStats?.data?.total_volume?.usd).toLocaleString("en-US",{style: "currency",currency: "usd"}):'No data'}/></Col>
+        <Col span={12}><Statistic title="Total Markets" value={globalStats?globalStats?.data?.markets:'No data'}/></Col>
       </Row>
 
       <div className="home-heading-container">

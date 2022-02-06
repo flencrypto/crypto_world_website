@@ -57,6 +57,9 @@ export const cryptoApiCoingecko = createApi({
         getExchangesCoingecko: builder.query({
             query: () => createThirddRequest(`/exchanges`),
         }),
+        getGlobalStatCoingecko: builder.query({
+            query: () => createThirddRequest(`/global`),
+        }),
     })
 })
 
@@ -65,6 +68,7 @@ export const {
     useGetAllCryptosCoingeckoQuery,
     useGetExchangesCoingeckoQuery,
     useGetSpecificCoinQuery,
+    useGetGlobalStatCoingeckoQuery,
 } = cryptoApiCoingecko;
 
 
