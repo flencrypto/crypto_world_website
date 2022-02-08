@@ -6,7 +6,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import 'antd/dist/antd.css';
 
 import { Provider } from "react-redux"
-import store from './app/store'
+import store from './apiServices/store/store'
 
 
 

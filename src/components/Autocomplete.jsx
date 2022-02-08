@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import { useHistory } from "react-router-dom";
 import {AutoComplete,Input} from 'antd';
 import { SearchOutlined } from "@ant-design/icons/lib/icons";
-import { useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
+import { useGetAllCryptosCoingeckoQuery } from "../apiServices/cryptoApi"
 
 const Autocomplete = ({onPage,setNewsCategory}) => {
 

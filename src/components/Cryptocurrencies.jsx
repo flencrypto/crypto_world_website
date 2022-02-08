@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import millify from "millify";
 import {Pagination,Table  } from "antd";
-import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../services/cryptoApi";
+import { useGetCryptosCoingeckoQuery,useGetAllCryptosCoingeckoQuery } from "../apiServices/cryptoApi";
 import { Link } from "react-router-dom";
 import Autocomplete from "./Autocomplete";
 

@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {useGetExchangesCoingeckoQuery,useGetSpecificCoinQuery} from '../services/cryptoApi'
+import {useGetExchangesCoingeckoQuery,useGetSpecificCoinQuery} from "../apiServices/cryptoApi"
 import { Table } from "antd";
 
 const Exchanges = () => {

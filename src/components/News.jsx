@@ -1,8 +1,8 @@
 import React,{useState} from "react";
 import {Typography, Row,Col,Avatar,Card} from 'antd';
 import moment from "moment";
-import { useGetNewsQuery } from "../services/newsApi";
-import Autocomplete from './Autocomplete'
+import { useGetNewsQuery } from "../apiServices/newsApi";
+import Autocomplete from './Autocomplete';
 
 const {Text,Title} = Typography
 const demoImage = 'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';

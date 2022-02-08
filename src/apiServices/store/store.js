@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {cryptoApiCoingecko } from "../services/cryptoApi";
-import { newsApi } from "../services/newsApi";
+import {cryptoApiCoingecko } from "../cryptoApi";
+import { newsApi } from "../newsApi";
 
 
 export default configureStore({
