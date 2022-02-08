@@ -7,14 +7,9 @@ const cryptoApiHeaderCoingecko = {
     'x-rapidapi-key':  process.env.REACT_APP_RAPIDAPI_API_KEY,
 }
 
-// const params = {vs_currency:'usd'};
-
 const baseUrlCoingecko = 'https://coingecko.p.rapidapi.com';
 
 const createRequest = (url)=> ({url,headers:cryptoApiHeaderCoingecko});
-
-// const createSecondRequest = (url)=> ({url,headers:cryptoApiHeaderCoingecko});
-
 
 export const cryptoApiCoingecko = createApi({
     reducerPath: 'cryptoApiCoingecko',
