@@ -1,4 +1,5 @@
 import './App.css'
+import React,{useState,useEffect} from "react";
 import {Switch,Route,Link} from 'react-router-dom'
 import { Layout,Typography, Space } from "antd"
 
@@ -6,6 +7,14 @@ import { Navba,Exchanges,Homepage, Cryptocurrencies,CryptoDetails, News,NotFound
 
 
 const App = () => {
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     console.log('This app will render every 10s!');
+  //   }, 10000);
+  //   return () => clearInterval(interval);
+  // }, []);
+
 
   return (
       <>

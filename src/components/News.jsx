@@ -12,8 +12,8 @@ const News = ({simplified}) => {
   const [newsCategory, setNewsCategory] = useState('Cryptocurrency');
   const page_size = simplified ? 6 : 25;
 
-  const {data:cryptoNews,isFetching} = useGetNewsQuery({newsCategory:newsCategory,page_size:page_size})
-  console.log(cryptoNews)
+  const {data:cryptoNews,isFetching} = useGetNewsQuery({newsCategory:newsCategory,page_size:page_size},{pollingInterval:300000})
+  // console.log(cryptoNews)
 
   if (isFetching) return 'Loading'
 

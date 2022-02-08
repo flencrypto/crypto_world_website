@@ -2,23 +2,17 @@ import React from "react";
 import { Typography, Row, Col, Statistic } from "antd";
 import { Link } from "react-router-dom";
 import { useGetGlobalStatCoingeckoQuery } from "../apiServices/cryptoApi";
-// import { useGetCryptosCoingeckoQuery } from "../services/cryptoApi";
-
 
 import { Cryptocurrencies,News } from ".";
-
 const {Title} = Typography
-
 
 
 const Homepage = () => {
 
 
-  const {data:globalStats,isFetching} = useGetGlobalStatCoingeckoQuery();
+  const {data:globalStats,isFetching} = useGetGlobalStatCoingeckoQuery({pollingInterval:60000});
 
   const globalData = globalStats?.data
-
-  // console.log(globalStats?.data)
 
   if (isFetching) return 'Loading...'
  
