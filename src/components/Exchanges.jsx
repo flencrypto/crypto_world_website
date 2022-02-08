@@ -63,9 +63,10 @@ const Exchanges = () => {
       dataIndex: 'website',
       key: 'website',
     },
-
-
   ]
+
+  if (isFetching) return "Loading..."
+
 
   return (
     <>
@@ -74,11 +75,7 @@ const Exchanges = () => {
     </div>
 
     <Table dataSource={exchangesTableData} columns={columns} pagination={false} />
-
-
-    
     </>
-    
 
   );
 };
