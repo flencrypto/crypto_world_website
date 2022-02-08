@@ -39,7 +39,7 @@ const News = ({simplified}) => {
                           <a href={news?.link} target="blank" rel="noreferrer">
                             <div className="news-image-container">
                               <Title className="news-title" level={4}>{news?.title}</Title>
-                              <img className="news-image" src={news?.media || demoImage} alt="" />
+                              <img src={news?.media || demoImage} alt="" />
                             </div> 
                             <p>
                               {news?.summary?.length >100? `${news?.summary?.substring(0,100)}...`: news?.summary || ''}
@@ -50,7 +50,7 @@ const News = ({simplified}) => {
                                 <Text>{news?.authors[0] || ''}</Text>
                               </div>
 
-                                <Text>{news?.published_date||''}</Text>
+                                <Text>{news?.published_date || ''}</Text>
                     
                                 {/* <Text>{moment(news?.datePublished).startOf('ss').fromNow()}</Text> */}
                             </div>

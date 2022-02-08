@@ -322,7 +322,7 @@ a:hover {
   width: 70%;
 }
 
-.news-image {
+.news-image-container > img {
   width: 120px;
   height: 120px;
 }
