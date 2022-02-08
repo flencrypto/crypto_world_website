@@ -1,7 +1,5 @@
 import React,{useState} from "react";
-import ReactPaginate from "react-paginate";
 import {useGetExchangesCoingeckoQuery,useGetSpecificCoinQuery} from '../services/cryptoApi'
-import { Link } from "react-router-dom";
 import { Table } from "antd";
 
 const Exchanges = () => {
