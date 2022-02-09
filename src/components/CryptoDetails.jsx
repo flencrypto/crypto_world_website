@@ -114,7 +114,7 @@ const CryptoDetails = () => {
         </Col>
       </Col>
 
-      <Title level={3}> Bitcoin (BTC) Price Chart </Title> 
+      <Title className="coin-chart-heading" level={3}> Bitcoin (BTC) Price Chart </Title> 
 
       <Select 
         defaultValue='7d' 
