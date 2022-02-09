@@ -13,7 +13,7 @@ const CryptoDetails = () => {
   const [timePeriod, setTimePeriod] = useState('7d');
   const {data,isFetching} = useGetSpecificCoinQuery({coinId:coinId},{pollingInterval:30000});
   const cryptoDetails = data?.market_data;
-  console.log(data,data?.description?.en)
+  console.log(data)
 
 
   if (isFetching) return 'Loading...'
@@ -70,9 +70,12 @@ const CryptoDetails = () => {
 
       {/* Statistics */}
       <Col className="coin-heading-container">
-        <Title level={2} className="coin-name">
-          {data?.name} ({data?.symbol?.toUpperCase()}) Price
-        </Title>
+        <div className="coin-header">
+          <img src={data?.image?.small} alt="" />
+          <Title level={2} className="coin-name">
+            {data?.name} ({data?.symbol?.toUpperCase()}) Price
+          </Title>
+        </div>
         <p>{data?.name} live price in US Dollar (USD). View value statistics, market cap and supply.</p>
       </Col>
 
