@@ -79,7 +79,7 @@ const CryptoDetails = () => {
       <Col className="stats-container">
         <Col className="coin-value-statistics">
           <Col className="coin-value-statistics-heading">
-            <Title level={3} className="coin-details-heading">{data?.name} Value Statistics</Title>
+            <Title level={3} className="coin-details-heading">Value Statistics</Title>
             <p>An overview showing the statistics of {data?.name}, such as the base and quote currency, the rank, and trading volume.</p>
           </Col>
 
@@ -97,7 +97,7 @@ const CryptoDetails = () => {
 
         <Col className="other-stats-info">
           <Col className="coin-value-statistics-heading">
-            <Title level={3} className="coin-details-heading">{data?.name} Supply Statistics</Title>
+            <Title level={3} className="coin-details-heading"> Supply Statistics</Title>
             <p>Supply statistics of {data?.name} such as Max, Total, and Circulating Supply</p>
           </Col>
 
@@ -132,7 +132,7 @@ const CryptoDetails = () => {
       <Col className="coin-desc-link">
         {/* <Row className="coin-desc"> */}
           <Title level={3} className="coin-details-heading">What is {data?.name}?</Title>
-          {HTMLReactParser(data?.description?.en)}
+          {(data?.description?.en)?HTMLReactParser(data?.description?.en):'No Description'}
         {/* </Row> */}
         </Col>
 
