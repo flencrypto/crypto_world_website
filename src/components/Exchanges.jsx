@@ -5,7 +5,7 @@ import { Table } from "antd";
 const Exchanges = () => {
   const [coinId,setCoinId] = useState('bitcoin')
   const {data:exchanges,isFetching} = useGetExchangesCoingeckoQuery({pollingInterval:30000});
-  const {data:specificCoin}= useGetSpecificCoinQuery({id:coinId})
+  const {data:specificCoin}= useGetSpecificCoinQuery({coinId:coinId})
 
   // (exchanges&&console.log(exchanges))
   const btc_price = specificCoin?.market_data?.current_price?.usd

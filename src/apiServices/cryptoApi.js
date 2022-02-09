@@ -19,7 +19,7 @@ export const cryptoApiCoingecko = createApi({
             query: ({page,per_page}) => createRequest(`/coins/markets?vs_currency=usd&page=${page}&per_page=${per_page}`),
         }),
         getSpecificCoin: builder.query({
-            query: ({id}) => createRequest(`/coins/${id}`),
+            query: ({coinId}) => createRequest(`/coins/${coinId}`),
         }),
 
         getAllCryptosCoingecko: builder.query({
