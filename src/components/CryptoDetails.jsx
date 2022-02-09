@@ -63,9 +63,9 @@ const CryptoDetails = () => {
   const genericStats = [
     // { title: 'Number Of Markets', value: cryptoDetails?.numberOfMarkets, icon: <FundOutlined /> },
     // { title: 'Number Of Exchanges', value: cryptoDetails?.numberOfExchanges, icon: <MoneyCollectOutlined /> },
-    { title: 'Max Supply', value: cryptoDetails?.max_supply ? cryptoDetails?.max_supply?.toLocaleString("en-US",{style: "currency",currency: "usd",maximumFractionDigits: 0}) : <QuestionOutlined />, icon: <ExclamationCircleOutlined /> },
-    { title: 'Total Supply', value: cryptoDetails?.total_supply ? cryptoDetails?.total_supply?.toLocaleString("en-US",{style: "currency",currency: "usd",maximumFractionDigits: 0}): <QuestionOutlined/>, icon: <ExclamationCircleOutlined /> },
-    { title: 'Circulating Supply', value: cryptoDetails?.circulating_supply ? cryptoDetails?.circulating_supply?.toLocaleString("en-US",{style: "currency",currency: "usd",maximumFractionDigits: 0}):<QuestionOutlined/>, icon: <ExclamationCircleOutlined /> },
+    { title: 'Max Supply', value: cryptoDetails?.max_supply ? cryptoDetails?.max_supply?.toLocaleString("en-US",{style: "decimal",maximumFractionDigits: 0}) : <QuestionOutlined />, icon: <ExclamationCircleOutlined /> },
+    { title: 'Total Supply', value: cryptoDetails?.total_supply ? cryptoDetails?.total_supply?.toLocaleString("en-US",{style: "decimal",maximumFractionDigits: 0}): <QuestionOutlined/>, icon: <ExclamationCircleOutlined /> },
+    { title: 'Circulating Supply', value: cryptoDetails?.circulating_supply ? cryptoDetails?.circulating_supply?.toLocaleString("en-US",{style: "decimal",maximumFractionDigits: 0}):<QuestionOutlined/>, icon: <ExclamationCircleOutlined /> },
   ];
 
   return (
