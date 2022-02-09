@@ -76,14 +76,6 @@ const CryptoDetails = () => {
         </Title>
         <p>{data?.name} live price in US Dollar (USD). View value statistics, market cap and supply.</p>
       </Col>
-      <Select 
-        defaultValue='7d' 
-        className="select-timeperiod" 
-        placeholder='Select Time Period'
-        onChange={(value)=>setTimePeriod(value)}>
-          {time?.map((date)=> <Option key={date} value={date}/>)}
-      </Select>
-      {/* Line chart */}
 
       <Col className="stats-container">
         <Col className="coin-value-statistics">
@@ -101,8 +93,6 @@ const CryptoDetails = () => {
               <Text className="stats">{value}</Text>
             </Col>
           ))}
-
-
         </Col>
 
 
@@ -121,17 +111,19 @@ const CryptoDetails = () => {
               <Text className="stats">{value}</Text>
             </Col>
           ))}
-
-
         </Col>
       </Col>
 
+      <Title level={3}> Bitcoin (BTC) Price Chart </Title> 
 
-
-
-
-
-
+      <Select 
+        defaultValue='7d' 
+        className="select-timeperiod" 
+        placeholder='Select Time Period'
+        onChange={(value)=>setTimePeriod(value)}>
+          {time?.map((date)=> <Option key={date} value={date}/>)}
+      </Select>
+      {/* Line chart */}
 
     </Col>
   );
