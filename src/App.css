@@ -226,9 +226,9 @@ a:hover {
 }
 
 .coin-desc-link {
-  display: flex;
-  gap: 40px;
-  margin-top: 40px;
+  /* display: flex; */
+  /* gap: 40px; */
+  /* margin-top: 40px; */
   padding-top: 20px;
 }
 
@@ -242,16 +242,9 @@ a:hover {
   opacity: 0.9;
 }
 
-.coin-desc-link a {
-  color: var(--pink);
-}
-
-.coin-desc-link h3 {
-  font-weight: 700;
-}
 
 .coin-desc {
-  flex: 0.5;
+  /* flex: 0.5; */
 }
 
 .coin-links {

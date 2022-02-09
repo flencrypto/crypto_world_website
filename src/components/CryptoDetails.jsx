@@ -13,7 +13,7 @@ const CryptoDetails = () => {
   const [timePeriod, setTimePeriod] = useState('7d');
   const {data,isFetching} = useGetSpecificCoinQuery({coinId:coinId},{pollingInterval:30000});
   const cryptoDetails = data?.market_data;
-  console.log(data?.description?.en)
+  console.log(data,data?.description?.en)
 
 
   if (isFetching) return 'Loading...'
@@ -128,6 +128,13 @@ const CryptoDetails = () => {
 
 
       {/* Description */}
+
+      <Col className="coin-desc-link">
+        {/* <Row className="coin-desc"> */}
+          <Title level={3} className="coin-details-heading">What is {data?.name}?</Title>
+          {HTMLReactParser(data?.description?.en)}
+        {/* </Row> */}
+        </Col>
 
 
 
