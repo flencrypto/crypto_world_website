@@ -125,6 +125,10 @@ const CryptoDetails = () => {
       </Select>
       {/* Line chart */}
 
+
+
+      
+
     </Col>
   );
 };

@@ -14,7 +14,7 @@ const Cryptocurrencies = ({simplified}) => {
   const [cryptos, setCryptos] = useState();
   const [searchTerm, setSearchTerm] = useState('');
 
-  const {data:cryptosCoingecko, isFetching} = useGetCryptosCoingeckoQuery({page,per_page},{pollingInterval:60000});
+  const {data:cryptosCoingecko, isFetching} = useGetCryptosCoingeckoQuery({page,per_page},{pollingInterval:30000});
   // console.log({cryptosCoingecko})
 
   const {data:allCryptos} = useGetAllCryptosCoingeckoQuery();
