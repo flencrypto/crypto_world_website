@@ -8,14 +8,6 @@ import { Navba,Exchanges,Homepage, Cryptocurrencies,CryptoDetails, News,NotFound
 
 const App = () => {
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.log('This app will render every 10s!');
-  //   }, 10000);
-  //   return () => clearInterval(interval);
-  // }, []);
-
-
   return (
       <>
         <div className="app">
