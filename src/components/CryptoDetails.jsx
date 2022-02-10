@@ -23,7 +23,7 @@ const CryptoDetails = () => {
 
   if (isFetching) return 'Loading...'
 
-  const time = ['1', '7','14','30','90','180','365','1095','max'];
+  const time = [['1d','1'], ['7d','7'],['14d','14'],['30d','30'],['90d','90'],['180d','180'],['1y','365'],['3y','1095'],['5y','1825'],['max','max']];
 
   const stats = [
     { title: 'Price to USD', 
@@ -123,7 +123,7 @@ const CryptoDetails = () => {
       </Col>
 
       {/* Line chart */}
-      <Title className="coin-chart-heading" level={3}> {data?.name} history price chart in day(s)</Title> 
+      <Title className="coin-chart-heading" level={3}> {data?.name} price chart in day(s)</Title> 
 
 
       <Select 
@@ -131,7 +131,7 @@ const CryptoDetails = () => {
         className="select-timeperiod" 
         placeholder='Select Time Period'
         onChange={(value)=>setTimePeriod(value)}>
-          {time?.map((day)=> <Option key={day} value={day}/>)}
+          {time?.map((day)=> <Option key={day[0]} value={day[1]}>{day[0]}</Option>)}
       </Select>
 
       <LineChart coinHistory={cryptoHistory} currentPrice={cryptoDetails?.current_price?.usd} coinName={data?.name} />
