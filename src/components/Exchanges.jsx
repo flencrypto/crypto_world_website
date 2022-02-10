@@ -7,7 +7,7 @@ const Exchanges = () => {
   const {data:exchanges,isFetching} = useGetExchangesCoingeckoQuery({pollingInterval:30000});
   const {data:specificCoin}= useGetSpecificCoinQuery({coinId:coinId})
 
-  // (exchanges&&console.log(exchanges))
+  console.log(exchanges)
   const btc_price = specificCoin?.market_data?.current_price?.usd
 
 
@@ -24,6 +24,16 @@ const Exchanges = () => {
     website: (exchange?.url)?<a href={exchange?.url} target="_blank" rel="noopener noreferrer">
                                 {exchange?.name}
                             </a>:"No data",
+    
+    info: (exchange?.country || exchange?.description || exchange?.has_trading_incentive)? 
+                                <> 
+                                  <b>Founded Country:</b> {exchange?.country} <br /> 
+                                  <b>Has Trading Incentive:</b> {exchange?.has_trading_incentive?.toLocaleString() ? (exchange?.has_trading_incentive?.toLocaleString() === 'false'?'No':'Yes') : 'N/A'} <br />
+                                  <b>Description:</b> {exchange?.description?exchange?.description:'No description'} <br />
+                                  
+                                  
+                                </>               
+                              :'No information',
   })) 
 
   const columns = [
@@ -74,7 +84,12 @@ const Exchanges = () => {
       <h1>Top 100 Cryptocurrency Exchanges Ranking by Trust Score </h1>
     </div>
 
-    <Table dataSource={exchangesTableData} columns={columns} pagination={false} scroll={{ x: 800, y: 1500 }} />
+    <Table 
+      dataSource={exchangesTableData} 
+      columns={columns} 
+      pagination={false} 
+      scroll={{ x: 800, y: 1500 }}
+      expandable={{expandedRowRender: record => <p style={{ margin: 0 }}>{record.info}</p>,}} />
     </>
 
   );
