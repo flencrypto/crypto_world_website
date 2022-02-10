@@ -9,7 +9,7 @@ const LineChart = ({coinHistory,currentPrice,coinName}) => {
   const coinTimestamp = [];
 
   for (let i=0;i<coinHistory?.prices?.length; i += 1) {
-    coinTimestamp.push( new Date(coinHistory?.prices[i][0]).toLocaleDateString())
+    coinTimestamp.push( new Date(coinHistory?.prices[i][0]).toLocaleDateString() + ' ' + new Date(coinHistory?.prices[i][0]).toLocaleTimeString())
     coinPrice.push(coinHistory?.prices[i][1])
   }
   const data = {
