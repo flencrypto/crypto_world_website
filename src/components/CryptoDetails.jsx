@@ -42,11 +42,11 @@ const CryptoDetails = () => {
     icon: <ThunderboltOutlined /> },
 
     { title: '24h High / 24h Low', 
-    value: (cryptoDetails?.high_24h?.usd ? cryptoDetails?.high_24h?.usd?.toLocaleString("en-US",{style: "currency",currency: "usd",maximumFractionDigits: 0}) : '?') + ' / ' + (cryptoDetails?.low_24h?.usd ? cryptoDetails?.low_24h?.usd?.toLocaleString("en-US",{style: "currency",currency: "usd",maximumFractionDigits: 0}) : '?'), 
+    value: (cryptoDetails?.high_24h?.usd ? cryptoDetails?.high_24h?.usd?.toLocaleString("en-US",{style: "currency",currency: "usd",maximumFractionDigits: 2}) : '?') + ' / ' + (cryptoDetails?.low_24h?.usd ? cryptoDetails?.low_24h?.usd?.toLocaleString("en-US",{style: "currency",currency: "usd",maximumFractionDigits: 2}) : '?'), 
     icon: <RiseOutlined /> },
 
     { title: 'All-time High / All-time Low', 
-    value: (cryptoDetails?.ath?.usd ? cryptoDetails?.ath?.usd?.toLocaleString("en-US",{style: "currency",currency: "usd",maximumFractionDigits: 0}) : '?') + ' / ' + (cryptoDetails?.atl?.usd ? cryptoDetails?.atl?.usd?.toLocaleString("en-US",{style: "currency",currency: "usd",maximumFractionDigits: 0}) : '?'), 
+    value: (cryptoDetails?.ath?.usd ? cryptoDetails?.ath?.usd?.toLocaleString("en-US",{style: "currency",currency: "usd",maximumFractionDigits: 2}) : '?') + ' / ' + (cryptoDetails?.atl?.usd ? cryptoDetails?.atl?.usd?.toLocaleString("en-US",{style: "currency",currency: "usd",maximumFractionDigits: 2}) : '?'), 
     icon: <TrophyOutlined /> },
   ];
 
@@ -73,7 +73,7 @@ const CryptoDetails = () => {
         <div className="coin-header">
           <img src={data?.image?.small} alt="" />
           <Title level={2} className="coin-name">
-            {data?.name} ({data?.symbol?.toUpperCase()}) Price
+            {data?.name} ({data?.symbol?.toUpperCase()})
           </Title>
         </div>
         <p>{data?.name} live price in US Dollar (USD). View value statistics, market cap and supply.</p>
@@ -113,6 +113,7 @@ const CryptoDetails = () => {
               <Text className="stats">{value}</Text>
             </Col>
           ))}
+
         </Col>
       </Col>
 
