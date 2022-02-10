@@ -101,6 +101,7 @@ const Cryptocurrencies = ({simplified}) => {
       dataIndex: 'market_cap',
       key: 'market_cap',
       fixed: 'right',
+      width: 150,
       sorter: (a,b) => Number(a.market_cap.replace(/[$,]/g, '')) - Number(b.market_cap.replace(/[$,]/g, ''))
     },
   ];
@@ -117,7 +118,7 @@ const Cryptocurrencies = ({simplified}) => {
           </div>
         )}
 
-        <Table dataSource={tableData} columns={columns} pagination={false} scroll={{ x: 800, y: 1500 }} />
+        <Table dataSource={tableData} columns={columns} pagination={false} scroll={{ x: 800, y: 1500 }} fixed='top'/>
 
         {!simplified&&
         <div>
