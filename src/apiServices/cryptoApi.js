@@ -31,6 +31,9 @@ export const cryptoApiCoingecko = createApi({
         getGlobalStatCoingecko: builder.query({
             query: () => createRequest(`/global`),
         }),
+        getCryptoHistory: builder.query({
+            query: ({timePeriod,coinId}) => createRequest(`/coins/${coinId}/market_chart?days=${timePeriod}&vs_currency=usd`),
+        }),
     })
 })
 
@@ -40,6 +43,7 @@ export const {
     useGetAllCryptosCoingeckoQuery,
     useGetExchangesCoingeckoQuery,
     useGetGlobalStatCoingeckoQuery,
+    useGetCryptoHistoryQuery,
 } = cryptoApiCoingecko;
 
 

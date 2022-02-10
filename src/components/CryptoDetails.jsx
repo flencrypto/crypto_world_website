@@ -3,22 +3,27 @@ import HTMLReactParser from "html-react-parser";
 import {useParams} from 'react-router-dom';
 import {Col,Row,Typography,Select} from 'antd'
 import { DollarCircleOutlined, FundOutlined,SlidersOutlined, ExclamationCircleOutlined, RiseOutlined, TrophyOutlined, NumberOutlined, ThunderboltOutlined } from '@ant-design/icons';
-import { useGetSpecificCoinQuery } from "../apiServices/cryptoApi";
+import { useGetSpecificCoinQuery,useGetCryptoHistoryQuery } from "../apiServices/cryptoApi";
+import LineChart from './LineChart';
+
 
 const {Title,Text} = Typography;
 const {Option} = Select;
 
 const CryptoDetails = () => {
   const {coinId} = useParams();
-  const [timePeriod, setTimePeriod] = useState('7d');
+  const [timePeriod, setTimePeriod] = useState('1');
   const {data,isFetching} = useGetSpecificCoinQuery({coinId:coinId},{pollingInterval:30000});
   const cryptoDetails = data?.market_data;
-  console.log(data)
+  
+  const {data:cryptoHistory} = useGetCryptoHistoryQuery({coinId:coinId,timePeriod:timePeriod});
+
+  console.log(cryptoDetails,cryptoHistory)
 
 
   if (isFetching) return 'Loading...'
 
-  const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
+  const time = ['1', '7','14','30','90','180','365','1095','max'];
 
   const stats = [
     { title: 'Price to USD', 
@@ -118,15 +123,18 @@ const CryptoDetails = () => {
       </Col>
 
       {/* Line chart */}
-      <Title className="coin-chart-heading" level={3}> Bitcoin (BTC) Price Chart </Title> 
+      <Title className="coin-chart-heading" level={3}> {data?.name} history price chart in day(s)</Title> 
+
 
       <Select 
-        defaultValue='7d' 
+        defaultValue={timePeriod} 
         className="select-timeperiod" 
         placeholder='Select Time Period'
         onChange={(value)=>setTimePeriod(value)}>
-          {time?.map((date)=> <Option key={date} value={date}/>)}
+          {time?.map((day)=> <Option key={day} value={day}/>)}
       </Select>
+
+      <LineChart coinHistory={cryptoHistory} currentPrice={cryptoDetails?.current_price?.usd} coinName={data?.name} />
       
 
 

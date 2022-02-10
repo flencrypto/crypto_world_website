@@ -5,6 +5,28 @@ import { Layout,Typography, Space } from "antd"
 
 import { Navba,Exchanges,Homepage, Cryptocurrencies,CryptoDetails, News,NotFound,Test } from "./components"
 
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js'
+import { Chart } from 'react-chartjs-2'
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+)
+
 
 const App = () => {
 
