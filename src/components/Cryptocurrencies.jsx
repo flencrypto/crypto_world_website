@@ -118,7 +118,7 @@ const Cryptocurrencies = ({simplified}) => {
           </div>
         )}
 
-        <Table dataSource={tableData} columns={columns} pagination={false} scroll={{ x: 800, y: 1500 }} fixed='top'/>
+        <Table dataSource={tableData} columns={columns} pagination={false} scroll={{ x: 800, y: 1500 }}/>
 
         {!simplified&&
         <div>

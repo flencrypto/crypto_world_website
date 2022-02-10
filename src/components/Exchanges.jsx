@@ -31,6 +31,7 @@ const Exchanges = () => {
       title: 'Rank',
       dataIndex: 'rank',
       key:'rank',
+      fixed:'left',
       sorter: (a, b) => a.rank - b.rank,
     },
     {
@@ -60,6 +61,7 @@ const Exchanges = () => {
       title: 'Website',
       dataIndex: 'website',
       key: 'website',
+      fixed:'right',
     },
   ]
 
@@ -72,7 +74,7 @@ const Exchanges = () => {
       <h1>Top 100 Cryptocurrency Exchanges Ranking by Trust Score </h1>
     </div>
 
-    <Table dataSource={exchangesTableData} columns={columns} pagination={false} />
+    <Table dataSource={exchangesTableData} columns={columns} pagination={false} scroll={{ x: 800, y: 1500 }} />
     </>
 
   );
