@@ -27,7 +27,7 @@ const Exchanges = () => {
     
     info: (exchange?.country || exchange?.description || exchange?.has_trading_incentive)? 
                                 <> 
-                                  <b>Founded Country:</b> {exchange?.country} <br /> 
+                                  <b>Founded Country:</b> {exchange?.country?exchange?.country:'Unknown'} <br /> 
                                   <b>Has Trading Incentive:</b> {exchange?.has_trading_incentive?.toLocaleString() ? (exchange?.has_trading_incentive?.toLocaleString() === 'false'?'No':'Yes') : 'N/A'} <br />
                                   <b>Description:</b> {exchange?.description?exchange?.description:'No description'} <br />
                                   
