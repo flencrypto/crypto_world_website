@@ -134,7 +134,7 @@ const CryptoDetails = () => {
           {time?.map((day)=> <Option key={day[0]} value={day[1]}>{day[0]}</Option>)}
       </Select>
 
-      <LineChart coinHistory={cryptoHistory} currentPrice={cryptoDetails?.current_price?.usd} coinName={data?.name} />
+      <LineChart coinHistory={cryptoHistory} />
       
 
 
