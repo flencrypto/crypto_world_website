@@ -10,9 +10,9 @@ const demoImage = 'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=Ne
 const News = ({simplified}) => {
   const onPage = 'News';
   const [newsCategory, setNewsCategory] = useState('Cryptocurrency');
-  const page_size = simplified ? 6 : 25;
+  const page_size = simplified ? 10 : 25;
 
-  const {data:cryptoNews,isFetching} = useGetNewsQuery({newsCategory:newsCategory,page_size:page_size},{pollingInterval:300000})
+  const {data:cryptoNews,isFetching} = useGetNewsQuery({newsCategory:newsCategory,page_size:page_size},{pollingInterval:3000000})
   // console.log(cryptoNews)
 
   if (isFetching) return 'Loading'
@@ -22,7 +22,7 @@ const News = ({simplified}) => {
       {!simplified&& (
         <>
         
-        <div className="search-crypto">
+          <div className="search-crypto">
               <h1>Latest Crypto News</h1>
             <Autocomplete onPage={onPage} setNewsCategory={setNewsCategory}></Autocomplete>
 

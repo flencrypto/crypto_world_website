@@ -58,8 +58,10 @@ const Cryptocurrencies = ({simplified}) => {
         title: '#',
         dataIndex: 'ranked_by_market_cap',
         key:'ranked_by_market_cap',
-        // defaultSortOrder: 'descend',
+        width: 70,
+        fixed: 'left',
         sorter: (a, b) => a.ranked_by_market_cap - b.ranked_by_market_cap,
+        
       },
     {
       title: 'Name',
@@ -98,6 +100,7 @@ const Cryptocurrencies = ({simplified}) => {
       title: 'Market Cap', 
       dataIndex: 'market_cap',
       key: 'market_cap',
+      fixed: 'right',
       sorter: (a,b) => Number(a.market_cap.replace(/[$,]/g, '')) - Number(b.market_cap.replace(/[$,]/g, ''))
     },
   ];
@@ -114,7 +117,7 @@ const Cryptocurrencies = ({simplified}) => {
           </div>
         )}
 
-        <Table dataSource={tableData} columns={columns} pagination={false} />
+        <Table dataSource={tableData} columns={columns} pagination={false} scroll={{ x: 800, y: 1500 }} />
 
         {!simplified&&
         <div>
